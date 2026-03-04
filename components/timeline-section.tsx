@@ -61,9 +61,9 @@ export default function TimelineSection({ dbEvents }: { dbEvents?: any[] }) {
     ? dbEvents.map(e => ({
       icon: CalendarDays,
       title: e.title,
-      time: new Date(e.start_time).toLocaleString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' }),
+      time: new Date(e.start_time).toLocaleString('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', hour: '2-digit', minute: '2-digit' }),
       description: e.description || e.location,
-      day: new Date(e.start_time).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }),
+      day: new Date(e.start_time).toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid', day: 'numeric', month: 'short' }),
       featured: false
     }))
     : timelineEvents;
@@ -124,8 +124,8 @@ export default function TimelineSection({ dbEvents }: { dbEvents?: any[] }) {
                 <div className="absolute left-4 sm:left-1/2 transform -translate-x-1/2 z-10">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${event.featured
-                        ? "bg-[#AAFF00] shadow-[0_0_30px_rgba(170,255,0,0.5)]"
-                        : "bg-zinc-800 border-2 border-[#AAFF00]/50"
+                      ? "bg-[#AAFF00] shadow-[0_0_30px_rgba(170,255,0,0.5)]"
+                      : "bg-zinc-800 border-2 border-[#AAFF00]/50"
                       }`}
                   >
                     <event.icon className={`w-5 h-5 ${event.featured ? "text-black" : "text-[#AAFF00]"}`} />
@@ -139,16 +139,16 @@ export default function TimelineSection({ dbEvents }: { dbEvents?: any[] }) {
                 >
                   <div
                     className={`group backdrop-blur-md bg-white/5 border rounded-xl p-5 transition-all duration-300 hover:scale-105 ${event.featured
-                        ? "border-[#AAFF00]/50 bg-[#AAFF00]/5"
-                        : "border-white/10 hover:border-[#AAFF00]/30"
+                      ? "border-[#AAFF00]/50 bg-[#AAFF00]/5"
+                      : "border-white/10 hover:border-[#AAFF00]/30"
                       }`}
                   >
                     <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "sm:justify-end" : ""}`}>
-                      <span className="text-[10px] font-bold text-[#AAFF00]/60 uppercase tracking-widest">
+                      <span suppressHydrationWarning className="text-[10px] font-bold text-[#AAFF00]/60 uppercase tracking-widest">
                         {event.day}
                       </span>
                     </div>
-                    <span className="text-[#AAFF00] text-sm font-semibold">{event.time}</span>
+                    <span suppressHydrationWarning className="text-[#AAFF00] text-sm font-semibold">{event.time}</span>
                     <h3 className="text-xl font-bold text-white mt-1 group-hover:text-[#AAFF00] transition-colors">
                       {event.title}
                     </h3>

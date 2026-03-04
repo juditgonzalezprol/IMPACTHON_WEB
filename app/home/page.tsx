@@ -71,8 +71,8 @@ export default async function HomeInternoPage() {
                                 <article key={ann.id} className={`p-5 rounded-2xl border backdrop-blur-md transition-all ${ann.is_pinned ? 'bg-[#AAFF00]/10 border-[#AAFF00]/40 shadow-[0_0_15px_rgba(170,255,0,0.1)]' : 'bg-white/5 border-white/10'}`}>
                                     <div className="flex items-center gap-2 mb-2">
                                         {ann.is_pinned && <Info className="text-[#AAFF00] w-4 h-4" />}
-                                        <span className={`text-xs font-bold uppercase tracking-wider ${ann.is_pinned ? 'text-[#AAFF00]' : 'text-gray-500'}`}>
-                                            {new Date(ann.created_at).toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' })}
+                                        <span suppressHydrationWarning className={`text-xs font-bold uppercase tracking-wider ${ann.is_pinned ? 'text-[#AAFF00]' : 'text-gray-500'}`}>
+                                            {new Date(ann.created_at).toLocaleString('es-ES', { timeZone: 'Europe/Madrid', dateStyle: 'long', timeStyle: 'short' })}
                                             {ann.is_pinned && " · FIJADO"}
                                         </span>
                                     </div>
@@ -105,7 +105,7 @@ export default async function HomeInternoPage() {
                                         </div>
                                         <div className="w-full">
                                             <div className="text-xs font-bold uppercase text-[#AAFF00] tracking-wider mb-1">
-                                                {new Date(event.start_time).toLocaleString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' })}
+                                                {new Date(event.start_time).toLocaleString('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', hour: '2-digit', minute: '2-digit' })}
                                             </div>
                                             <div className="text-white font-bold mb-1">{event.title}</div>
                                             {event.description && <div className="text-gray-400 text-sm mb-1">{event.description}</div>}

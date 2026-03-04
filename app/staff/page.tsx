@@ -99,7 +99,7 @@ export default async function StaffDashboardPage() {
                                 <div key={event.id} className="p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition flex justify-between items-center group">
                                     <div>
                                         <h4 className="font-bold">{event.title}</h4>
-                                        <p className="text-xs text-[#AAFF00]">{new Date(event.start_time).toLocaleString('es-ES')} - {event.location}</p>
+                                        <p className="text-xs text-[#AAFF00]">{new Date(event.start_time).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })} - {event.location}</p>
                                     </div>
                                     <form action={async (fd) => { "use server"; await deleteEvent(fd); }}>
                                         <input type="hidden" name="id" value={event.id} />
@@ -149,7 +149,7 @@ export default async function StaffDashboardPage() {
                                             <h4 className="font-bold">{ann.title}</h4>
                                         </div>
                                         <p className="text-sm text-gray-400 line-clamp-2">{ann.content}</p>
-                                        <p className="text-xs text-gray-500 mt-2">{new Date(ann.created_at).toLocaleString('es-ES')}</p>
+                                        <p className="text-xs text-gray-500 mt-2">{new Date(ann.created_at).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</p>
                                     </div>
                                     <form action={async (fd) => { "use server"; await deleteAnnouncement(fd); }}>
                                         <input type="hidden" name="id" value={ann.id} />
