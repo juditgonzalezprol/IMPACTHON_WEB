@@ -46,15 +46,14 @@ export default function ParticipationBanner() {
 
       <div
         ref={containerRef}
-        className={`w-full mx-auto relative z-10 transition-all duration-700 text-center ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+        className={`w-full mx-auto relative z-10 transition-all duration-700 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
       >
         <div className="space-y-6 px-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             <span className="text-white block">No importa si</span>
             <span
-              className="block transition-all duration-300"
+              className="block transition-all duration-300 pb-2 xl:pb-4"
               style={{
                 background: `linear-gradient(90deg, 
                   #AAFF00 0%, 
@@ -74,7 +73,7 @@ export default function ParticipationBanner() {
             <span className="text-[#AAFF00] block">Puedes participar</span>
             <span className="text-white block">como equipo de</span>
             <span
-              className="block transition-all duration-300"
+              className="block transition-all duration-300 pb-2 xl:pb-4"
               style={{
                 background: `linear-gradient(90deg, 
                   #AAFF00 0%, 
