@@ -98,9 +98,8 @@ export default function HeroSection() {
         {/* Hero Content */}
         <div className="relative z-10 text-center px-0 sm:px-0 lg:px-0 max-w-none mx-0 w-full flex flex-col items-center">
           <div
-            className={`transition-all duration-700 delay-200 w-full flex justify-center relative ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`transition-all duration-700 delay-200 w-full flex justify-center relative ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <div className="relative w-full h-96 sm:h-[40rem] lg:h-[50rem]">
               <Image
@@ -110,20 +109,19 @@ export default function HeroSection() {
                 className="object-contain object-center scale-200"
                 priority
               />
-              
+
               {/* Fecha superpuesta */}
               <div className="absolute top-[20%] left-1/2 -translate-x-1/2 z-20">
                 <span className="inline-block px-8 py-4 text-lg sm:text-xl lg:text-2xl font-bold text-[#AAFF00] border border-[#AAFF00]/30 rounded-full backdrop-blur-sm bg-[#AAFF00]/10 animate-glow-pulse">
-                  15-17 Marzo 2026 | ETSE USC
+                  10-12 Abril 2026 | ETSE USC
                 </span>
               </div>
             </div>
           </div>
 
           <div
-            className={`text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-3xl -mt-8 sm:-mt-12 lg:-mt-16 mb-16 sm:mb-20 lg:mb-24 h-20 sm:h-16 transition-all duration-700 delay-400 ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-3xl -mt-8 sm:-mt-12 lg:-mt-16 mb-16 sm:mb-20 lg:mb-24 h-20 sm:h-16 transition-all duration-700 delay-400 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <TypewriterText
               texts={[
@@ -139,17 +137,15 @@ export default function HeroSection() {
           </div>
 
           <div
-            className={`mb-12 transition-all duration-700 delay-600 w-full px-4 ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`mb-12 transition-all duration-700 delay-600 w-full px-4 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <CountdownTimer targetDate={targetDate} />
           </div>
 
           <div
-            className={`flex flex-col sm:flex-row gap-6 justify-center transition-all duration-700 delay-800 pb-16 ${
-              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`flex flex-col sm:flex-row gap-6 justify-center transition-all duration-700 delay-800 pb-16 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <Button
               size="lg"
