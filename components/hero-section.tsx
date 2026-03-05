@@ -120,7 +120,7 @@ export default function HeroSection() {
           </div>
 
           <div
-            className={`text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-3xl -mt-8 sm:-mt-12 lg:-mt-16 mb-16 sm:mb-20 lg:mb-24 h-20 sm:h-16 transition-all duration-700 delay-400 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            className={`text-2xl sm:text-3xl lg:text-4xl text-gray-300 max-w-3xl -mt-8 sm:-mt-12 lg:-mt-16 mb-16 sm:mb-20 lg:mb-24 h-32 sm:h-16 transition-all duration-700 delay-400 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
           >
             <TypewriterText
