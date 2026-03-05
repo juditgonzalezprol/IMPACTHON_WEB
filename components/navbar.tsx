@@ -308,6 +308,16 @@ export default function Navbar() {
               {renderAuthLinksDesktop()}
             </div>
 
+            {/* Mobile register link - only shown when not logged in */}
+            {!profile && (
+              <a
+                href="/login"
+                className="md:hidden absolute left-4 text-[#AAFF00] text-sm font-bold hover:underline flex items-center gap-1"
+              >
+                Regístrate aquí →
+              </a>
+            )}
+
             {/* Mobile menu button */}
             <div className="md:hidden absolute right-4">
               <button
