@@ -22,8 +22,6 @@ const navLinks = [
   { name: "Noticias", href: "/#noticias" },
   { name: "Directorio", href: "/directorio" },
   { name: "FAQ", href: "/#faq" },
-  { name: "GDG USC", href: "#", external: true },
-  { name: "Devpost", href: "#", external: true },
 ]
 
 export default function Navbar() {
@@ -286,13 +284,14 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-2 lg:gap-4">
               {navLinks.map((link) => {
-                const isActive = !link.external && activeSection === link.href.split('#')[1]
+                const linkAny = link as any
+                const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
+                    target={linkAny.external ? "_blank" : undefined}
+                    rel={linkAny.external ? "noopener noreferrer" : undefined}
                     className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg ${isActive
                       ? "text-[#AAFF00]"
                       : "text-gray-300 hover:text-white hover:text-[#AAFF00]"
@@ -328,13 +327,14 @@ export default function Navbar() {
           >
             <div className="py-4 border-t border-white/10 flex flex-col">
               {navLinks.map((link, index) => {
-                const isActive = !link.external && activeSection === link.href.split('#')[1]
+                const linkAny = link as any
+                const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
+                    target={linkAny.external ? "_blank" : undefined}
+                    rel={linkAny.external ? "noopener noreferrer" : undefined}
                     className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 ${isActive
                       ? "text-[#AAFF00] bg-[#AAFF00]/10"
                       : "text-gray-300 hover:text-white hover:bg-white/5"

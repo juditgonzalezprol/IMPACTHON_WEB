@@ -5,7 +5,7 @@ export default function FloatingContactButtons() {
         <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
             {/* Google Button */}
             <a
-                href="https://google.com" // Replace with actual Google form/drive link
+                href="https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-impac-thon-2026/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex items-center justify-center w-14 h-14 bg-white hover:bg-gray-100 text-black rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"

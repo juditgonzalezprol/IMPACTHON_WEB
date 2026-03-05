@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect"
 import { Button } from "@/components/ui/button"
 import { TypewriterText } from "@/components/ui/animated-text"
-import RegistrationModal from "@/components/registration-modal"
 import { ChevronDown } from "lucide-react"
 
 function CountdownTimer({ targetDate }: { targetDate: Date }) {
@@ -64,9 +64,9 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 }
 
 export default function HeroSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
-  const targetDate = new Date("2026-03-15T09:00:00")
+  const targetDate = new Date("2026-04-10T09:00:00")
 
   useEffect(() => {
     setIsLoaded(true)
@@ -149,7 +149,7 @@ export default function HeroSection() {
           >
             <Button
               size="lg"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => router.push('/login')}
               className="bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold py-6 px-12 rounded-xl text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(170,255,0,0.4)] group"
             >
               <span className="group-hover:tracking-wider transition-all">Registrate Ahora</span>
@@ -177,7 +177,6 @@ export default function HeroSection() {
         </div>
       </section>
 
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }
