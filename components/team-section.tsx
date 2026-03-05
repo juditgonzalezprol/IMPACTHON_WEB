@@ -7,14 +7,16 @@ const teamMembers = [
     {
         name: "Judit González Prol",
         role: "President & Organizer",
-        university: "Universidade de Santiago de Compostela",
+        university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "JG",
         color: "#AAFF00",
     },
     {
         name: "Laura Antelo",
         role: "Organizer",
-        university: null,
+        university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "LA",
         color: "#60A5FA",
     },
@@ -22,27 +24,31 @@ const teamMembers = [
         name: "Mateo Bodenlle Villarino",
         role: "Treasurer & Organizer",
         university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "MB",
         color: "#34D399",
     },
     {
         name: "Diego Cristóbal",
         role: "Secretary & Organizer",
-        university: null,
+        university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "DC",
         color: "#F472B6",
     },
     {
         name: "Iago Feijóo Rey",
         role: "Organizer",
-        university: null,
+        university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "IF",
         color: "#FB923C",
     },
     {
         name: "Sara Castro",
         role: "Organizer",
-        university: null,
+        university: "Universidad de Santiago de Compostela",
+        gdg: "GDG Santiago de Compostela",
         initials: "SC",
         color: "#A78BFA",
     },
@@ -115,15 +121,14 @@ export default function TeamSection() {
                             </h3>
 
                             <p
-                                className="text-sm font-semibold mb-2 uppercase tracking-wider"
+                                className="text-sm font-semibold mb-3 uppercase tracking-wider"
                                 style={{ color: member.color }}
                             >
                                 {member.role}
                             </p>
 
-                            {member.university && (
-                                <p className="text-xs text-gray-500 mb-4">{member.university}</p>
-                            )}
+                            <p className="text-xs text-gray-500">{member.university}</p>
+                            <p className="text-xs text-gray-500">{member.gdg}</p>
                         </div>
                     ))}
                 </div>
