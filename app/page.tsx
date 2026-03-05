@@ -9,6 +9,7 @@ import PrizesSection from "@/components/prizes-section"
 import TimelineSection from "@/components/timeline-section"
 import SponsorsSection from "@/components/sponsors-section"
 import FAQSection from "@/components/faq-section"
+import TeamSection from "@/components/team-section"
 import Footer from "@/components/footer"
 import FloatingArrow from "@/components/floating-arrow"
 
@@ -47,6 +48,7 @@ export default function Home() {
         <TimelineSection />
         <SponsorsSection />
         <FAQSection />
+        <TeamSection />
         <Footer />
       </div>
     </main>
