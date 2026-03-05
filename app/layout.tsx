@@ -4,6 +4,7 @@ import { Poppins, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import FloatingContactButtons from '@/components/floating-contact-buttons'
+import { createClient } from '@/lib/supabase/server'
 
 const poppins = Poppins({ weight: ['400', '700', '900'], subsets: ["latin"], variable: "--font-sans" });
 const playfairDisplay = Playfair_Display({ weight: ['700', '900'], subsets: ["latin"], variable: "--font-heading" });
@@ -23,16 +24,19 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   return (
     <html lang="es">
       <body className={`${poppins.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
-        <FloatingContactButtons />
+        {user && <FloatingContactButtons />}
         <Analytics />
       </body>
     </html>
