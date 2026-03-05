@@ -49,11 +49,11 @@ export default function TracksSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <div
           ref={containerRef as any}
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00] uppercase tracking-widest mb-4 border border-[#AAFF00]/30 rounded-full">
             Categorias
@@ -75,61 +75,51 @@ export default function TracksSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {tracks.map((track, index) => (
-            <div
-              key={track.title}
-              className={`group relative backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-700 hover:border-[#AAFF00]/50 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              {/* Glow effect on hover */}
+        {/* Grid + TBA overlay wrapper */}
+        <div className="relative">
+          {/* Tracks grid (blurred behind overlay) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 select-none pointer-events-none">
+            {tracks.map((track, index) => (
               <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                style={{
-                  boxShadow: `0 0 60px ${track.color}20`,
-                }}
-              />
-
-              <div
-                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 transition-all duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `${track.color}20` }}
+                key={track.title}
+                className={`relative backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <track.icon className="w-8 h-8" style={{ color: track.color }} />
-              </div>
-
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#AAFF00] transition-colors">
-                {track.title}
-              </h3>
-              <p className="text-gray-400 leading-relaxed mb-6">{track.description}</p>
-
-              <div className="space-y-2">
-                {track.challenges.map((challenge) => (
-                  <div
-                    key={challenge}
-                    className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-gray-300 transition-colors"
-                  >
-                    <ArrowRight className="w-4 h-4 text-[#AAFF00]" />
-                    {challenge}
-                  </div>
-                ))}
-              </div>
-
-              {/* Animated border */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden -z-10">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div
-                    className="absolute inset-[-2px] rounded-2xl"
-                    style={{
-                      background: `linear-gradient(45deg, transparent, ${track.color}40, transparent)`,
-                      animation: "spin 3s linear infinite",
-                    }}
-                  />
+                <div
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
+                  style={{ backgroundColor: `${track.color}20` }}
+                >
+                  <track.icon className="w-8 h-8" style={{ color: track.color }} />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">{track.title}</h3>
+                <p className="text-gray-400 leading-relaxed mb-6">{track.description}</p>
+                <div className="space-y-2">
+                  {track.challenges.map((challenge) => (
+                    <div key={challenge} className="flex items-center gap-2 text-sm text-gray-500">
+                      <ArrowRight className="w-4 h-4 text-[#AAFF00]" />
+                      {challenge}
+                    </div>
+                  ))}
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* TO BE ANNOUNCED overlay */}
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-2xl backdrop-blur-md bg-black/60">
+            <div className="text-center px-6">
+              <span className="inline-block px-4 py-1.5 text-xs font-bold text-[#AAFF00] uppercase tracking-widest border border-[#AAFF00]/40 rounded-full mb-6 bg-[#AAFF00]/10">
+                Próximamente
+              </span>
+              <h3 className="text-4xl sm:text-6xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+                TO BE ANNOUNCED
+              </h3>
+              <p className="text-gray-400 text-base max-w-sm mx-auto">
+                Los retos del Impacthon se revelarán muy pronto. ¡Estáte atento!
+              </p>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
