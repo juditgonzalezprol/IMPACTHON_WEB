@@ -54,6 +54,13 @@ const teamMembers = [
     },
 ]
 
+const staffMembers = [
+    { name: "Oumaima El Omari Ellachgar", initials: "OE", color: "#E879F9" },
+    { name: "Elisa García García", initials: "EG", color: "#38BDF8" },
+    { name: "María Rañó Myro", initials: "MR", color: "#FCD34D" },
+    { name: "Lucas García", initials: "LG", color: "#4ADE80" },
+]
+
 export default function TeamSection() {
     const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.1 })
 
@@ -131,6 +138,34 @@ export default function TeamSection() {
                             <p className="text-xs text-gray-500">{member.gdg}</p>
                         </div>
                     ))}
+                </div>
+
+                {/* Staff subsection */}
+                <div className={`mt-16 transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+                    <div className="text-center mb-8">
+                        <span className="inline-block px-3 py-1 text-xs font-bold text-white/60 uppercase tracking-widest border border-white/20 rounded-full">
+                            Staff
+                        </span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        {staffMembers.map((member) => (
+                            <div
+                                key={member.name}
+                                className="group backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-5 text-center hover:border-[#AAFF00]/30 hover:bg-white/10 transition-all duration-300"
+                            >
+                                <div
+                                    className="w-12 h-12 rounded-xl flex items-center justify-center text-black font-black text-sm mx-auto mb-3 group-hover:scale-110 transition-transform"
+                                    style={{ backgroundColor: member.color }}
+                                >
+                                    {member.initials}
+                                </div>
+                                <h4 className="text-sm font-semibold text-white group-hover:text-[#AAFF00] transition-colors leading-tight">
+                                    {member.name}
+                                </h4>
+                                <p className="text-xs text-gray-500 mt-1">Staff</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
