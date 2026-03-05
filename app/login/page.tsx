@@ -13,6 +13,7 @@ export default async function LoginPage(
     const searchParams = await props.searchParams
     const error = searchParams?.error === 'true'
     const signupError = searchParams?.signupError === 'true'
+    const signupSuccess = searchParams?.signupSuccess === 'true'
     const message = searchParams?.message
 
     return (
@@ -45,6 +46,12 @@ export default async function LoginPage(
                             <h2 className="text-3xl font-bold mb-2">Portal Hackathon</h2>
                             <p className="text-gray-400 text-sm">Organiza tu equipo y participa.</p>
                         </div>
+
+                        {signupSuccess && (
+                            <div className="p-3 bg-[#AAFF00]/10 border border-[#AAFF00]/50 rounded-lg text-[#AAFF00] text-sm text-center mb-4">
+                                ✅ ¡Registro completado! Revisa tu email y haz clic en el enlace de confirmación para acceder.
+                            </div>
+                        )}
 
                         {(error || signupError) && (
                             <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm text-center mb-4">
