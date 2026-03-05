@@ -111,8 +111,8 @@ export default function HeroSection() {
               />
 
               {/* Fecha superpuesta */}
-              <div className="absolute top-[20%] left-1/2 -translate-x-1/2 z-20">
-                <span className="inline-block px-8 py-4 text-lg sm:text-xl lg:text-2xl font-bold text-[#AAFF00] border border-[#AAFF00]/30 rounded-full backdrop-blur-sm bg-[#AAFF00]/10 animate-glow-pulse">
+              <div className="absolute top-[20%] left-1/2 -translate-x-1/2 z-20 w-full flex justify-center px-4">
+                <span className="inline-block px-4 py-2 sm:px-8 sm:py-4 text-sm sm:text-xl lg:text-2xl font-bold text-[#AAFF00] border border-[#AAFF00]/30 rounded-full backdrop-blur-sm bg-[#AAFF00]/10 animate-glow-pulse whitespace-nowrap">
                   10-12 Abril 2026 | ETSE USC
                 </span>
               </div>
