@@ -48,13 +48,13 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
       ].map((item, index) => (
         <div
           key={item.label}
-          className="flex flex-col items-center backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-10 min-w-[100px] sm:min-w-[150px] lg:min-w-[180px] transition-all duration-500 hover:border-[#AAFF00]/50 hover:bg-[#AAFF00]/5 group animate-slide-up"
+          className={`flex flex-col items-center backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-10 min-w-[70px] sm:min-w-[150px] lg:min-w-[180px] transition-all duration-500 hover:border-[#AAFF00]/50 hover:bg-[#AAFF00]/5 group animate-slide-up`}
           style={{ animationDelay: `${index * 100 + 800}ms` }}
         >
-          <span className="text-5xl sm:text-6xl lg:text-8xl font-bold text-[#AAFF00] tabular-nums group-hover:scale-110 transition-transform">
+          <span className="text-4xl sm:text-6xl lg:text-8xl font-bold text-[#AAFF00] tabular-nums group-hover:scale-110 transition-transform">
             {String(item.value).padStart(2, "0")}
           </span>
-          <span className="text-sm sm:text-base lg:text-xl text-gray-400 uppercase tracking-wider mt-2 font-semibold">
+          <span className="text-xs sm:text-base lg:text-xl text-gray-400 uppercase tracking-wider mt-2 font-semibold">
             {item.label}
           </span>
         </div>
