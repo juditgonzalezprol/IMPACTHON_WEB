@@ -19,25 +19,6 @@ export default function Footer() {
   return (
     <>
       <footer className="relative overflow-hidden">
-        {/* CTA Section */}
-        <div className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-zinc-950">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
-              Preparado para el <span className="text-[#AAFF00]">desafio</span>?
-            </h2>
-            <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-              Unete a mas de 200 participantes y crea soluciones con impacto real. Las plazas son limitadas!
-            </p>
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              size="lg"
-              className="bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(170,255,0,0.4)] group"
-            >
-              <span className="group-hover:tracking-wider transition-all">Registrar Equipo</span>
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-        </div>
 
         {/* Footer content */}
         <div className="py-12 px-4 sm:px-6 lg:px-8 bg-zinc-950 border-t border-white/10">
@@ -50,7 +31,7 @@ export default function Footer() {
                   <span className="text-[#AAFF00]">HON</span>
                 </a>
                 <p className="text-gray-400 text-sm leading-relaxed max-w-md mb-6">
-                  El mayor hackathon de la Universidad de Santiago de Compostela. 
+                  El mayor hackathon de la Universidad de Santiago de Compostela.
                   Transformando ideas en soluciones con impacto real desde 2023.
                 </p>
                 {/* Newsletter */}
@@ -89,11 +70,11 @@ export default function Footer() {
                 <h4 className="text-white font-bold mb-4">Contacto</h4>
                 <div className="space-y-3">
                   <a
-                    href="mailto:impacthon@usc.es"
+                    href="mailto:judit.gonzalez@gdg-sdc.org"
                     className="flex items-center gap-2 text-gray-400 hover:text-[#AAFF00] transition-colors text-sm"
                   >
                     <Mail className="w-4 h-4" />
-                    impacthon@usc.es
+                    judit.gonzalez@gdg-sdc.org
                   </a>
                   <div className="flex items-start gap-2 text-gray-400 text-sm">
                     <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />

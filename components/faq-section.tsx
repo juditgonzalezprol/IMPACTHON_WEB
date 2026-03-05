@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "Necesito un equipo?",
     answer:
-      "Puedes registrarte solo o con un equipo de hasta 4 personas. Si vienes solo, te ayudaremos a encontrar companeros durante la sesion de formacion de equipos.",
+      "Puedes registrarte solo o con un equipo de hasta 8 personas. Si vienes solo, te ayudaremos a encontrar companeros durante la sesion de formacion de equipos.",
   },
   {
     question: "Que debo llevar?",
@@ -52,7 +52,7 @@ export default function FAQSection() {
     <section ref={ref} id="faq" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-zinc-950/50 via-black to-black relative">
       {/* Decorative background texture */}
       <div className="absolute inset-0 opacity-20">
-        <div 
+        <div
           style={{
             backgroundImage: `linear-gradient(135deg, rgba(170, 255, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(170, 255, 0, 0.05) 50%, rgba(170, 255, 0, 0.05) 75%, transparent 75%, transparent)`,
             backgroundSize: '40px 40px',
@@ -63,9 +63,8 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto relative z-10">
         <div
           ref={containerRef as any}
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00] uppercase tracking-widest mb-4 border border-[#AAFF00]/30 rounded-full">
             FAQ
@@ -92,9 +91,8 @@ export default function FAQSection() {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className={`backdrop-blur-md bg-white/5 border border-white/10 rounded-xl px-6 data-[state=open]:border-[#AAFF00]/50 data-[state=open]:bg-[#AAFF00]/5 transition-all duration-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+              className={`backdrop-blur-md bg-white/5 border border-white/10 rounded-xl px-6 data-[state=open]:border-[#AAFF00]/50 data-[state=open]:bg-[#AAFF00]/5 transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <AccordionTrigger className="text-white hover:text-[#AAFF00] text-left py-5 hover:no-underline font-semibold">
