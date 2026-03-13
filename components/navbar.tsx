@@ -174,7 +174,7 @@ export default function Navbar() {
           Acceso
         </Button>
         <Button
-          onClick={() => router.push('/login')}
+          onClick={() => window.open('https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-impac-thon-2026/', '_blank')}
           className="ml-2 bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold px-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(170,255,0,0.3)]"
         >
           Regístrate
@@ -261,7 +261,7 @@ export default function Navbar() {
         <Button
           onClick={() => {
             setIsOpen(false)
-            router.push('/login')
+            window.open('https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-impac-thon-2026/', '_blank')
           }}
           className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold"
         >
@@ -311,7 +311,9 @@ export default function Navbar() {
             {/* Mobile register link - only shown when not logged in */}
             {!profile && (
               <a
-                href="/login"
+                href="https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-impac-thon-2026/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="md:hidden absolute left-4 text-[#AAFF00] text-sm font-bold hover:underline flex items-center gap-1"
               >
                 Regístrate aquí →

@@ -149,7 +149,7 @@ export default function HeroSection() {
           >
             <Button
               size="lg"
-              onClick={() => router.push('/login')}
+              onClick={() => window.open('https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-impac-thon-2026/', '_blank')}
               className="bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold py-6 px-12 rounded-xl text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(170,255,0,0.4)] group"
             >
               <span className="group-hover:tracking-wider transition-all">Registrate Ahora</span>
