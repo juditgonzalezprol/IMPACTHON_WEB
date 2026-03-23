@@ -3,25 +3,14 @@
 import Image from "next/image"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-
 const sponsors = [
-  { name: "Sponsor 1", logo: "/patrocinadores/Cartel Gallego.png" },
-  { name: "Sponsor 2", logo: "/patrocinadores/Cartel Gallego (2).png" },
-  { name: "Sponsor 3", logo: "/patrocinadores/Cartel Gallego (3).png" },
-  { name: "Sponsor 4", logo: "/patrocinadores/Cartel Gallego (4).png" },
-  { name: "Sponsor 5", logo: "/patrocinadores/Cartel Gallego (5).png" },
-  { name: "Sponsor 6", logo: "/patrocinadores/Cartel Gallego (6).png" },
-  { name: "Sponsor 7", logo: "/patrocinadores/Cartel Gallego (7).png" },
-  { name: "Sponsor 8", logo: "/patrocinadores/Cartel Gallego (8).png" },
-]
-
-const collaborators = [
-  { name: "USC" },
-  { name: "ETSE" },
-  { name: "Xunta de Galicia" },
-  { name: "Concello de Santiago" },
-  { name: "CESGA" },
-  { name: "Hub Emprendimiento" },
+  { name: "Google Developer Groups", logo: "/patrocinadores/Cartel Gallego (5).png", scale: "scale-125" },
+  { name: "Red Bull", logo: "/patrocinadores/redbull-color.svg" },
+  { name: "AVTE", logo: "/patrocinadores/Cartel Gallego (6).png", scale: "scale-125" },
+  { name: "ETSE", logo: "/patrocinadores/Cartel Gallego (2).png", scale: "scale-125" },
+  { name: "Dinahosting", logo: "/patrocinadores/dinahosting-white.svg" },
+  { name: "Cátedra CAME&IA", logo: "/patrocinadores/camelia-bg.png" },
+  { name: "GEM Galicia" },
 ]
 
 export default function SponsorsSection() {
@@ -34,7 +23,7 @@ export default function SponsorsSection() {
     <section ref={ref} className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-zinc-900/40 to-black relative overflow-hidden">
       {/* Decorative background texture */}
       <div className="absolute inset-0 opacity-20">
-        <div 
+        <div
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(170, 255, 0, 0.15) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
@@ -82,25 +71,22 @@ export default function SponsorsSection() {
                 className="group backdrop-blur-md bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 hover:border-[#AAFF00]/50 hover:bg-[#AAFF00]/5 hover:scale-105 h-32 sm:h-40 flex items-center justify-center p-4"
                 style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <Image
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  width={300}
-                  height={200}
-                  className="w-full h-auto object-contain group-hover:brightness-125 transition-all duration-300"
-                />
+                {sponsor.logo ? (
+                  <Image
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    width={300}
+                    height={200}
+                    className={`w-full h-auto max-h-full object-contain group-hover:brightness-125 transition-all duration-300 ${sponsor.scale || ""}`}
+                  />
+                ) : (
+                  <span className="text-white text-lg sm:text-2xl font-bold tracking-wide group-hover:text-[#AAFF00] transition-colors duration-300">
+                    {sponsor.name}
+                  </span>
+                )}
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Collaborators */}
-        <div
-          className={`transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-          style={{ transitionDelay: "500ms" }}
-        >
         </div>
       </div>
     </section>
