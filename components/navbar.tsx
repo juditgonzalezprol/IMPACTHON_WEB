@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, Newspaper, HomeIcon } from "lucide-react"
+import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon } from "lucide-react"
 import RegistrationModal from "@/components/registration-modal"
 import { createBrowserClient } from '@supabase/ssr'
 import {
@@ -19,9 +19,11 @@ const navLinks = [
   { name: "Retos", href: "/#retos" },
   { name: "Premios", href: "/#premios" },
   { name: "Agenda", href: "/#agenda" },
-  { name: "Noticias", href: "/#noticias" },
-  { name: "Directorio", href: "/directorio" },
   { name: "FAQ", href: "/#faq" },
+]
+
+const authNavLinks = [
+  { name: "Directorio", href: "/directorio" },
 ]
 
 export default function Navbar() {
@@ -280,9 +282,9 @@ export default function Navbar() {
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center h-16 sm:h-20">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-2 lg:gap-4">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Desktop Navigation - Center */}
+            <div className="hidden md:flex items-center gap-2 lg:gap-4 flex-1 justify-center">
               {navLinks.map((link) => {
                 const linkAny = link as any
                 const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
@@ -305,6 +307,19 @@ export default function Navbar() {
                 )
               })}
 
+              {user && authNavLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="relative px-4 py-2 font-medium transition-all duration-300 rounded-lg text-gray-300 hover:text-white hover:text-[#AAFF00]"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+            </div>
+
+            {/* Desktop Auth - Right */}
+            <div className="hidden md:flex items-center">
               {renderAuthLinksDesktop()}
             </div>
 
@@ -358,6 +373,17 @@ export default function Navbar() {
                   </a>
                 )
               })}
+
+              {user && authNavLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block px-4 py-3 rounded-lg font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ))}
 
               {renderAuthLinksMobile()}
             </div>
