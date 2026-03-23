@@ -2,34 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { Leaf, HeartPulse, Building2, ArrowRight } from "lucide-react"
-
-const tracks = [
-  {
-    icon: Leaf,
-    title: "Sostenibilidad",
-    description:
-      "Crea soluciones para combatir el cambio climatico, reducir residuos y promover un consumo responsable.",
-    color: "#22C55E",
-    challenges: ["Economia circular", "Energia limpia", "Biodiversidad"],
-  },
-  {
-    icon: HeartPulse,
-    title: "Salud Digital",
-    description:
-      "Desarrolla herramientas que mejoren el acceso a la salud, el bienestar mental y la calidad de vida.",
-    color: "#EF4444",
-    challenges: ["Telemedicina", "Salud mental", "Accesibilidad"],
-  },
-  {
-    icon: Building2,
-    title: "Smart Campus",
-    description:
-      "Diseña tecnologias para hacer nuestra universidad mas inteligente, eficiente y conectada.",
-    color: "#3B82F6",
-    challenges: ["Movilidad", "Gestion de espacios", "Comunidad"],
-  },
-]
+import { HelpCircle } from "lucide-react"
 
 export default function TracksSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({
@@ -42,7 +15,7 @@ export default function TracksSection() {
       {/* Animated grid background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(rgba(170, 255, 0, 0.1) 1px, transparent 1px), 
+          backgroundImage: `linear-gradient(rgba(170, 255, 0, 0.1) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(170, 255, 0, 0.1) 1px, transparent 1px)`,
           backgroundSize: "50px 50px",
         }} />
@@ -56,7 +29,7 @@ export default function TracksSection() {
             }`}
         >
           <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00] uppercase tracking-widest mb-4 border border-[#AAFF00]/30 rounded-full">
-            Categorias
+            Retos
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Elige tu{" "}
@@ -70,56 +43,35 @@ export default function TracksSection() {
               reto
             </span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Tres areas de impacto, infinitas posibilidades de innovacion.
+          <p className="text-gray-400 max-w-3xl mx-auto text-lg mb-4">
+            Diversas catedras, empresas, organizaciones y grupos de investigacion proponen lineas de trabajo especificas con premios, tecnologias y mentoria personalizados.
+          </p>
+          <p className="text-gray-500 max-w-3xl mx-auto text-base">
+            Cada equipo puede presentarse a tantos retos como desee con el mismo proyecto, optando <span className="text-white font-semibold">siempre</span> a los premios generales de desarrollo y emprendimiento. Cuando los anunciemos, cada reto incluira una descripcion, el nombre y logo de la entidad que lo propone, y sus premios.
           </p>
         </div>
 
-        {/* Grid + TBA overlay wrapper */}
-        <div className="relative">
-          {/* Tracks grid (blurred behind overlay) */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 select-none pointer-events-none">
-            {tracks.map((track, index) => (
-              <div
-                key={track.title}
-                className={`relative backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                  }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <div
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
-                  style={{ backgroundColor: `${track.color}20` }}
-                >
-                  <track.icon className="w-8 h-8" style={{ color: track.color }} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">{track.title}</h3>
-                <p className="text-gray-400 leading-relaxed mb-6">{track.description}</p>
-                <div className="space-y-2">
-                  {track.challenges.map((challenge) => (
-                    <div key={challenge} className="flex items-center gap-2 text-sm text-gray-500">
-                      <ArrowRight className="w-4 h-4 text-[#AAFF00]" />
-                      {challenge}
-                    </div>
-                  ))}
-                </div>
+        {/* 3 Placeholder cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`relative backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl p-8 transition-all duration-700 flex flex-col items-center justify-center min-h-[280px] ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+              style={{ transitionDelay: `${i * 150}ms` }}
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#AAFF00]/10 mb-6">
+                <HelpCircle className="w-8 h-8 text-[#AAFF00]/50" />
               </div>
-            ))}
-          </div>
-
-          {/* TO BE ANNOUNCED overlay */}
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-2xl backdrop-blur-md bg-black/60">
-            <div className="text-center px-6">
-              <span className="inline-block px-4 py-1.5 text-xs font-bold text-[#AAFF00] uppercase tracking-widest border border-[#AAFF00]/40 rounded-full mb-6 bg-[#AAFF00]/10">
-                Próximamente
+              <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00]/60 uppercase tracking-widest border border-[#AAFF00]/20 rounded-full mb-4">
+                Reto {i}
               </span>
-              <h3 className="text-4xl sm:text-6xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
-                TO BE ANNOUNCED
-              </h3>
-              <p className="text-gray-400 text-base max-w-sm mx-auto">
-                Los retos del Impacthon se revelarán muy pronto. ¡Estáte atento!
+              <h3 className="text-2xl font-bold text-white/30 mb-2">To Be Announced</h3>
+              <p className="text-gray-600 text-sm text-center">
+                Proximamente se revelara la entidad y los detalles de este reto.
               </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
