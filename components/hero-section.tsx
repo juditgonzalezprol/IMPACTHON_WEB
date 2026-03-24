@@ -125,7 +125,7 @@ export default function HeroSection() {
           >
             <TypewriterText
               texts={[
-                "48 horas de codigo e innovacion",
+                "36 horas de codigo e innovacion",
                 "Crea soluciones con impacto real",
                 "Conecta con los mejores talentos",
                 "Transforma ideas en startups",

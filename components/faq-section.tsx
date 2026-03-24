@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "Hay premios?",
     answer:
-      "Si, hay premios por valor de 5,000 euros distribuidos entre los mejores proyectos de cada categoria, ademas de premios especiales de nuestros sponsors.",
+      "Si, hay premios por valor de 2,000 euros distribuidos entre los mejores proyectos de cada categoria, ademas de premios especiales de nuestros sponsors.",
   },
   {
     question: "Puedo participar de forma remota?",
