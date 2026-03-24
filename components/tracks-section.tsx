@@ -52,8 +52,8 @@ export default function TracksSection() {
         </div>
 
         {/* 3 Placeholder cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
               className={`relative backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl p-8 transition-all duration-700 flex flex-col items-center justify-center min-h-[280px] ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

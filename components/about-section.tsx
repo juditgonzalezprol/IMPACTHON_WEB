@@ -7,26 +7,26 @@ import { Users, Clock, Trophy, Zap } from "lucide-react"
 const stats = [
   {
     icon: Users,
-    value: "200+",
+    value: "100+",
     label: "Participantes",
     suffix: "",
   },
   {
     icon: Clock,
-    value: "48",
+    value: "36",
     label: "Horas",
     suffix: "h",
   },
   {
     icon: Trophy,
-    value: "5,000",
+    value: "2,000",
     label: "en Premios",
     suffix: "€",
     prefix: true,
   },
   {
     icon: Zap,
-    value: "3",
+    value: "4",
     label: "Retos",
     suffix: "",
   },

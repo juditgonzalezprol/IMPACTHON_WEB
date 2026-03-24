@@ -2,7 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { Users, Lightbulb, Code, Send, Trophy } from "lucide-react"
+import { Users, Lightbulb, Code, Send } from "lucide-react"
 
 const steps = [
   {
@@ -27,7 +27,7 @@ const steps = [
     icon: Send,
     title: "Paso 4: Envía",
     description:
-      "Incluye documentación y una demostración convincente para mostrar el potencial y aplicabilidad de tu proyecto. ¡No olvides que todos los proyectos deben ser de código abierto!",
+      "Incluye documentación y una demostración convincente para mostrar el potencial y aplicabilidad de tu proyecto.",
   },
 ]
 
@@ -97,24 +97,6 @@ export default function HowToSection() {
           ))}
         </div>
 
-        {/* Prizes Section */}
-        <div
-          className={`backdrop-blur-md bg-gradient-to-r from-[#AAFF00]/10 to-transparent border border-[#AAFF00]/20 rounded-2xl p-12 text-center transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-          style={{ transitionDelay: "400ms" }}
-        >
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[#AAFF00]/20 mb-6">
-            <Trophy className="w-10 h-10 text-[#AAFF00]" />
-          </div>
-          <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            ¡Los <span className="text-[#AAFF00]">Premios</span>!
-          </h3>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            Compite por increíbles premios y reconocimiento. Los ganadores serán 
-            anunciados en la ceremonia de cierre.
-          </p>
-        </div>
       </div>
     </section>
   )

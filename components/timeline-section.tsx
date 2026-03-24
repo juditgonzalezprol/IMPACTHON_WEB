@@ -2,7 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { ClipboardList, PartyPopper, Code2, Users, Presentation, Award, CalendarDays } from "lucide-react"
+import { ClipboardList, PartyPopper, Code2, Users, Presentation, Award, CalendarDays, Gamepad2 } from "lucide-react"
 
 const timelineEvents = [
   {
@@ -28,10 +28,31 @@ const timelineEvents = [
     featured: true,
   },
   {
+    icon: Gamepad2,
+    title: "Minijuego sorpresa",
+    time: "Sabado 02:00",
+    description: "Actividad sorpresa para los mas nocturnos",
+    day: "DIA 2",
+  },
+  {
     icon: Users,
     title: "Mentoring",
     time: "Sabado 10:00 - 20:00",
     description: "Sesiones con mentores expertos de la industria",
+    day: "DIA 2",
+  },
+  {
+    icon: Gamepad2,
+    title: "Minijuego sorpresa",
+    time: "Sabado 16:00",
+    description: "Desconecta un momento con una actividad divertida",
+    day: "DIA 2",
+  },
+  {
+    icon: Gamepad2,
+    title: "Minijuego sorpresa",
+    time: "Sabado 23:30",
+    description: "Ultima actividad sorpresa del dia",
     day: "DIA 2",
   },
   {

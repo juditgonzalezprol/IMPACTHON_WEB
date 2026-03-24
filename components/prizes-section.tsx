@@ -2,7 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { Trophy, Briefcase, Code } from "lucide-react"
+import { Trophy, Briefcase, Code, Gift } from "lucide-react"
 
 export default function PrizesSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({
@@ -139,6 +139,22 @@ export default function PrizesSection() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Premios por reto */}
+        <div
+          className={`mt-8 sm:mt-12 backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl p-8 text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          style={{ transitionDelay: "300ms" }}
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#AAFF00]/10 mb-6">
+            <Gift className="w-8 h-8 text-[#AAFF00]/60" />
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+            Premios <span className="text-[#AAFF00]">por Reto</span>
+          </h3>
+          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+            Ademas de los premios generales, cada reto cuenta con sus propios premios especificos, propuestos y patrocinados por la empresa u organizacion que lo plantea. Estos se anunciaran junto con los detalles de cada reto.
+          </p>
         </div>
       </div>
     </section>
