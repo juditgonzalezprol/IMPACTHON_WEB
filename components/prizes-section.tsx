@@ -143,18 +143,20 @@ export default function PrizesSection() {
 
         {/* Premios por reto */}
         <div
-          className={`mt-8 sm:mt-12 backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl p-8 text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`mt-8 sm:mt-12 backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl px-8 py-5 transition-all duration-700 flex items-center gap-5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ transitionDelay: "300ms" }}
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#AAFF00]/10 mb-6">
-            <Gift className="w-8 h-8 text-[#AAFF00]/60" />
+          <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#AAFF00]/10">
+            <Gift className="w-6 h-6 text-[#AAFF00]/60" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Premios <span className="text-[#AAFF00]">por Reto</span>
-          </h3>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            Ademas de los premios generales, cada reto cuenta con sus propios premios especificos, propuestos y patrocinados por la empresa u organizacion que lo plantea. Estos se anunciaran junto con los detalles de cada reto.
-          </p>
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+              Premios <span className="text-[#AAFF00]">por Reto</span>
+            </h3>
+            <p className="text-gray-400 text-base">
+              Ademas de los premios generales, cada reto cuenta con sus propios premios especificos, propuestos y patrocinados por la empresa u organizacion que lo plantea. Estos se anunciaran junto con los detalles de cada reto.
+            </p>
+          </div>
         </div>
       </div>
     </section>
