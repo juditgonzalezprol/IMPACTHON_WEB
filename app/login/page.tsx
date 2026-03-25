@@ -1,9 +1,8 @@
 import Navbar from "@/components/navbar"
-import { login, signup } from "./actions"
+import { login } from "./actions"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default async function LoginPage(
     props: {
@@ -12,8 +11,6 @@ export default async function LoginPage(
 ) {
     const searchParams = await props.searchParams
     const error = searchParams?.error === 'true'
-    const signupError = searchParams?.signupError === 'true'
-    const signupSuccess = searchParams?.signupSuccess === 'true'
     const message = searchParams?.message
 
     return (
@@ -47,112 +44,47 @@ export default async function LoginPage(
                             <p className="text-gray-400 text-sm">Organiza tu equipo y participa.</p>
                         </div>
 
-                        {signupSuccess && (
-                            <div className="p-3 bg-[#AAFF00]/10 border border-[#AAFF00]/50 rounded-lg text-[#AAFF00] text-sm text-center mb-4">
-                                ✅ ¡Registro completado! Revisa tu email y haz clic en el enlace de confirmación para acceder.
-                            </div>
-                        )}
-
-                        {(error || signupError) && (
+                        {error && (
                             <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm text-center mb-4">
                                 {message || "Ha ocurrido un error al conectar"}
                             </div>
                         )}
 
-                        <Tabs defaultValue="login" className="w-full">
-                            <TabsList className="grid w-full grid-cols-2 mb-8 bg-black/40 border border-white/10 p-1 rounded-xl">
-                                <TabsTrigger
-                                    value="login"
-                                    className="rounded-lg data-[state=active]:bg-[#AAFF00] data-[state=active]:text-black transition-all font-bold"
-                                >
-                                    Iniciar Sesión
-                                </TabsTrigger>
-                                <TabsTrigger
-                                    value="register"
-                                    className="rounded-lg data-[state=active]:bg-[#AAFF00] data-[state=active]:text-black transition-all font-bold"
-                                >
-                                    Nuevo Registro
-                                </TabsTrigger>
-                            </TabsList>
-
-                            {/* Pestaña de Iniciar Sesión */}
-                            <TabsContent value="login" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                                <form className="space-y-6">
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="login-email" className="text-gray-300">Email</Label>
-                                            <Input
-                                                id="login-email"
-                                                name="email"
-                                                type="email"
-                                                placeholder="tu_correo@ejemplo.com"
-                                                required
-                                                className="bg-black/40 border-white/10 text-white placeholder:text-gray-600 focus-visible:ring-[#AAFF00]"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label htmlFor="login-password" className="text-gray-300">Contraseña</Label>
-                                                <a href="#" className="text-xs text-[#AAFF00] hover:underline">¿Olvidaste tu contraseña?</a>
-                                            </div>
-                                            <Input
-                                                id="login-password"
-                                                name="password"
-                                                type="password"
-                                                required
-                                                className="bg-black/40 border-white/10 text-white focus-visible:ring-[#AAFF00]"
-                                            />
-                                        </div>
+                        <form className="space-y-6">
+                            <div className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="login-email" className="text-gray-300">Email</Label>
+                                    <Input
+                                        id="login-email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="tu_correo@ejemplo.com"
+                                        required
+                                        className="bg-black/40 border-white/10 text-white placeholder:text-gray-600 focus-visible:ring-[#AAFF00]"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                        <Label htmlFor="login-password" className="text-gray-300">Contraseña</Label>
+                                        <a href="#" className="text-xs text-[#AAFF00] hover:underline">¿Olvidaste tu contraseña?</a>
                                     </div>
+                                    <Input
+                                        id="login-password"
+                                        name="password"
+                                        type="password"
+                                        required
+                                        className="bg-black/40 border-white/10 text-white focus-visible:ring-[#AAFF00]"
+                                    />
+                                </div>
+                            </div>
 
-                                    <Button
-                                        formAction={login}
-                                        className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold h-12 rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(170,255,0,0.3)]"
-                                    >
-                                        Acceder a tu perfil
-                                    </Button>
-                                </form>
-                            </TabsContent>
-
-                            {/* Pestaña de Crear Cuenta (Registro) */}
-                            <TabsContent value="register" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                                <form className="space-y-6">
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="register-email" className="text-gray-300">Correo Electrónico</Label>
-                                            <Input
-                                                id="register-email"
-                                                name="email"
-                                                type="email"
-                                                placeholder="tu_correo@ejemplo.com"
-                                                required
-                                                className="bg-black/40 border-white/10 text-white placeholder:text-gray-600 focus-visible:ring-[#AAFF00]"
-                                            />
-                                            <p className="text-xs text-gray-500">Usaremos este email para contactarte sobre el hackathon.</p>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="register-password" className="text-gray-300">Crea una contraseña</Label>
-                                            <Input
-                                                id="register-password"
-                                                name="password"
-                                                type="password"
-                                                required
-                                                minLength={6}
-                                                className="bg-black/40 border-white/10 text-white focus-visible:ring-[#AAFF00]"
-                                            />
-                                            <p className="text-xs text-gray-500">Mínimo 6 caracteres.</p>
-                                        </div>
-                                    </div>
-
-                                    <Button
-                                        formAction={signup}
-                                        className="w-full bg-white text-black hover:bg-gray-200 font-bold h-12 rounded-lg transition-all duration-300"
-                                    >
-                                        Completar Registro
-                                    </Button>
-                                </form>
-                            </TabsContent>
-                        </Tabs>
+                            <Button
+                                formAction={login}
+                                className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold h-12 rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(170,255,0,0.3)]"
+                            >
+                                Acceder a tu perfil
+                            </Button>
+                        </form>
 
                     </div>
                 </div>
