@@ -9,7 +9,7 @@ const steps = [
     icon: Users,
     title: "Paso 1: El Equipo",
     description:
-      "Forma tu equipo de hasta 4 miembros, diviértete y colabora efectivamente. Puedes traer tu propio equipo o unirte a uno en el evento.",
+      "Forma tu equipo de 2 a 6 miembros, diviértete y colabora efectivamente. Puedes traer tu propio equipo o unirte a uno en el evento.",
   },
   {
     icon: Lightbulb,

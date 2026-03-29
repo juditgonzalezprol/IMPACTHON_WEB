@@ -27,7 +27,7 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
   ])
 
   const addMember = () => {
-    if (teamMembers.length < 4) {
+    if (teamMembers.length < 6) {
       setTeamMembers([...teamMembers, { name: "", email: "", university: "" }])
     }
   }
@@ -163,9 +163,9 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-white">
-                  Miembros del Equipo ({teamMembers.length}/4)
+                  Miembros del Equipo ({teamMembers.length}/6)
                 </h3>
-                {teamMembers.length < 4 && (
+                {teamMembers.length < 6 && (
                   <Button
                     variant="outline"
                     size="sm"

@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "Necesito un equipo?",
     answer:
-      "Puedes registrarte solo o con un equipo de hasta 6 personas. Si vienes solo, te ayudaremos a encontrar companeros durante la sesion de formacion de equipos. Si tienes alguna necesidad especial respecto al tamano del equipo, contactanos y lo hablamos — tenemos flexibilidad.",
+      "Puedes registrarte solo o con un equipo de 2 a 6 personas. Si vienes solo, te ayudaremos a encontrar companeros durante la sesion de formacion de equipos. Si tienes alguna necesidad especial respecto al tamano del equipo, contactanos y lo hablamos — tenemos flexibilidad.",
   },
   {
     question: "Que debo llevar?",

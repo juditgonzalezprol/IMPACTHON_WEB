@@ -11,6 +11,8 @@ const sponsors = [
   { name: "Dinahosting", logo: "/patrocinadores/dinahosting-white.svg" },
   { name: "Cátedra CAME&IA", logo: "/patrocinadores/camelia-bg.png" },
   { name: "GEM Galicia" },
+  { name: "Eurostars" },
+  { name: "Raiola" },
 ]
 
 export default function SponsorsSection() {
