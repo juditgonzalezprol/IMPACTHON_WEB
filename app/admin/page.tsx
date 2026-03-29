@@ -111,7 +111,7 @@ export default async function AdminDashboardPage() {
                             <div className="flex justify-between items-start mb-2">
                                 <h3 className="text-xl font-bold">{team.name}</h3>
                                 <span className="text-xs bg-white/10 px-2 py-1 rounded-md text-gray-300">
-                                    {team.team_members?.length || 0} / 8 ints.
+                                    {team.team_members?.length || 0} / 6 ints.
                                 </span>
                             </div>
                             <p className="text-gray-400 text-sm mb-4 line-clamp-2">{team.description || "Sin descripción"}</p>
