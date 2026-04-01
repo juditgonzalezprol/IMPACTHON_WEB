@@ -14,18 +14,17 @@ type Sponsor = {
 const oro: Sponsor[] = [
   { name: "OSIX" },
   { name: "Cátedra CAMELIA - Plexus", logo: "/patrocinadores/camelia-bg.png" },
-  { name: "Eurostars" },
+  { name: "Eurostars", logo: "/patrocinadores/eurostars-white.png" },
 ]
 
 const plata: Sponsor[] = [
   { name: "Dinahosting", logo: "/patrocinadores/dinahosting-white.svg" },
   { name: "Red Bull", logo: "/patrocinadores/redbull-color.svg" },
-  { name: "Raiola" },
+  { name: "Raiola", logo: "/patrocinadores/raiola.png" },
 ]
 
 const colaborador: Sponsor[] = [
-  { name: "GEM Galicia" },
-  { name: "USC" },
+  { name: "GEM Galicia", logo: "/patrocinadores/gem-galicia-white.png" },
   { name: "Google Developer Groups", logo: "/patrocinadores/Cartel Gallego (5).png", scale: "scale-125" },
   { name: "AVTE", logo: "/patrocinadores/Cartel Gallego (6).png", scale: "scale-125" },
   { name: "ETSE", logo: "/patrocinadores/Cartel Gallego (2).png", scale: "scale-125" },
