@@ -12,7 +12,7 @@ type Sponsor = {
 }
 
 const oro: Sponsor[] = [
-  { name: "OSIX" },
+  { name: "OSIX", logo: "/patrocinadores/osix.png" },
   { name: "Cátedra CAMELIA - Plexus", logo: "/patrocinadores/camelia-bg.png" },
   { name: "Eurostars", logo: "/patrocinadores/eurostars-white.png" },
 ]
