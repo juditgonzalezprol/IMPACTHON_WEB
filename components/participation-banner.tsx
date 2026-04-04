@@ -53,16 +53,10 @@ export default function ParticipationBanner() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             <span className="text-white block">No importa si</span>
             <span
-              className="block transition-all duration-300 pb-2 xl:pb-4"
+              className="block transition-all duration-300"
               style={{
-                background: `linear-gradient(90deg, 
-                  #AAFF00 0%, 
-                  #AAFF00 ${Math.min(100, colorProgress)}%, 
-                  rgba(255, 255, 255, 0.5) ${Math.min(100, colorProgress)}%, 
-                  rgba(255, 255, 255, 0.5) 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                color: `rgb(${Math.min(170, Math.floor(170 * colorProgress / 100))}, ${Math.min(255, Math.floor(255 * colorProgress / 100))}, 0)`,
+                opacity: Math.max(0.5, colorProgress / 100),
               }}
             >
               no sabes programar.
@@ -73,16 +67,10 @@ export default function ParticipationBanner() {
             <span className="text-[#AAFF00] block">Puedes participar</span>
             <span className="text-white block">como equipo de</span>
             <span
-              className="block transition-all duration-300 pb-2 xl:pb-4"
+              className="block transition-all duration-300"
               style={{
-                background: `linear-gradient(90deg, 
-                  #AAFF00 0%, 
-                  #AAFF00 ${Math.min(100, colorProgress - 50)}%, 
-                  rgba(255, 255, 255, 0.5) ${Math.min(100, colorProgress - 50)}%, 
-                  rgba(255, 255, 255, 0.5) 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                color: `rgb(${Math.min(170, Math.floor(170 * Math.max(0, colorProgress - 50) / 100))}, ${Math.min(255, Math.floor(255 * Math.max(0, colorProgress - 50) / 100))}, 0)`,
+                opacity: Math.max(0.5, Math.max(0, colorProgress - 50) / 100),
               }}
             >
               emprendimiento o de desarrollo.
