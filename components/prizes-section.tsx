@@ -83,7 +83,7 @@ export default function PrizesSection() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">1er Premio por equipo</p>
-                  <p className="text-3xl font-bold text-[#AAFF00]">500€</p>
+                  <p className="text-3xl font-bold text-[#AAFF00]">???€</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
@@ -94,7 +94,7 @@ export default function PrizesSection() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">2do Premio por equipo</p>
-                  <p className="text-3xl font-bold text-white">300€</p>
+                  <p className="text-3xl font-bold text-white">???€</p>
                 </div>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function PrizesSection() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">1er Premio por equipo</p>
-                  <p className="text-3xl font-bold text-[#AAFF00]">500€</p>
+                  <p className="text-3xl font-bold text-[#AAFF00]">???€</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
@@ -134,7 +134,7 @@ export default function PrizesSection() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm mb-1">2do Premio por equipo</p>
-                  <p className="text-3xl font-bold text-white">300€</p>
+                  <p className="text-3xl font-bold text-white">???€</p>
                 </div>
               </div>
             </div>
