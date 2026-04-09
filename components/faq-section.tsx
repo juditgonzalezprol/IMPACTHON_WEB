@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "Que debo llevar?",
     answer:
-      "Tu portatil, cargador, y muchas ganas de crear. Recomendamos traer tambien ropa comoda y articulos de aseo personal si planeas quedarte a dormir.",
+      "Tu portatil, cargador, una botella de agua para rellenar, y muchas ganas de crear. Recomendamos traer tambien ropa comoda y articulos de aseo personal si planeas quedarte a dormir.",
   },
   {
     question: "Hay premios?",
@@ -49,6 +49,11 @@ const faqs = [
     question: "Debo llevar comida o pagar por ella alli?",
     answer:
       "No, el evento cubre todas las comidas: dos cenas, la comida del sabado, dos desayunos, y snacks, cafes y dulces durante todo el evento. No esperes comida muy fit — piensa en pizza, kebab y cosas rapidas. Eso si, trae una botella de agua para rellenar en las fuentes de la facultad, ya que no proporcionamos otra bebida aparte de estas.",
+  },
+  {
+    question: "Da creditos ECTS?",
+    answer:
+      "Si, pero debes estar en la facultad durante toda la duracion del evento. Pasaremos lista y llevaremos un control estricto de entrada y salida para quienes quieran recibir creditos, mediante los QRs de la entrada y las badges que os proporcionaremos.",
   },
 ]
 
