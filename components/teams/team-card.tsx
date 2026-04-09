@@ -28,8 +28,10 @@ export default function TeamCard({
     const members = team.team_members || []
     const memberCount = members.length
 
-    // MAX 6 MEMBERS PER TEAM
-    const isFull = memberCount >= 6
+    // MAX 6 MEMBERS PER TEAM, except for "staff" which allows 18
+    const isStaffTeam = team.name?.toLowerCase() === 'staff'
+    const maxMembers = isStaffTeam ? 18 : 6
+    const isFull = memberCount >= maxMembers
 
     async function handleJoin() {
         setLoading(true)
@@ -97,7 +99,7 @@ export default function TeamCard({
                 <div className="flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-sm">
                     <Users size={14} className="text-[#AAFF00]" />
                     <span className={isFull ? "text-red-400 font-bold" : "text-gray-300"}>
-                        {memberCount}/6
+                        {memberCount}/{maxMembers}
                     </span>
                 </div>
             </div>

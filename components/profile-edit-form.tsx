@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Edit2 } from "lucide-react"
+import { Spinner } from "@/components/ui/spinner"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Checkbox } from "@/components/ui/checkbox"
 import { saveProfile } from "@/app/onboarding/actions" // Reuse the server action
@@ -99,9 +100,16 @@ export default function EditProfileForm({ profile }: { profile: any }) {
                         <Button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold h-12"
+                            className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold h-12 disabled:opacity-70"
                         >
-                            {loading ? "Guardando..." : "Guardar Cambios"}
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <Spinner className="size-5" />
+                                    Guardando...
+                                </span>
+                            ) : (
+                                "Guardar Cambios"
+                            )}
                         </Button>
                     </div>
                 </form>
