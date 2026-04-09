@@ -87,7 +87,7 @@ export default function Footer() {
 
             <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
               <p className="text-gray-500 text-sm">
-                2025 Impacthon USC. Todos los derechos reservados.
+                2026 Impacthon USC. Todos los derechos reservados.
               </p>
               <div className="flex items-center gap-6 text-gray-500 text-sm">
                 <a href="#" className="hover:text-[#AAFF00] transition-colors">Privacidad</a>
