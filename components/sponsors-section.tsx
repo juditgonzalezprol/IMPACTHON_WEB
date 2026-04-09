@@ -28,6 +28,9 @@ const colaborador: Sponsor[] = [
   { name: "Google Developer Groups", logo: "/patrocinadores/Cartel Gallego (5).png", scale: "scale-125" },
   { name: "AVTE", logo: "/patrocinadores/Cartel Gallego (6).png", scale: "scale-125" },
   { name: "ETSE", logo: "/patrocinadores/Cartel Gallego (2).png", scale: "scale-125" },
+  { name: "USC Emprende", logo: "/patrocinadores/usc-emprende.webp" },
+  { name: "Xunta de Galicia", logo: "/patrocinadores/xunta-galicia.webp" },
+  { name: "Concello de Santiago", logo: "/patrocinadores/concello-santiago.webp" },
 ]
 
 const tiers = [
