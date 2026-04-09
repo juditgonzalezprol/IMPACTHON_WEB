@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Spinner } from "@/components/ui/spinner"
 import { createTeam } from "@/app/equipos/actions"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
@@ -80,9 +81,16 @@ export default function CreateTeamForm() {
                         <Button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold"
+                            className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold disabled:opacity-70"
                         >
-                            {loading ? "Creando..." : "Crear Equipo"}
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <Spinner className="size-5" />
+                                    Creando...
+                                </span>
+                            ) : (
+                                "Crear Equipo"
+                            )}
                         </Button>
                     </div>
                 </form>

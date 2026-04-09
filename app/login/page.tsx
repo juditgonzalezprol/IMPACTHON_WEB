@@ -1,8 +1,5 @@
 import Navbar from "@/components/navbar"
-import { login } from "./actions"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+import LoginForm from "@/components/login-form"
 
 export default async function LoginPage(
     props: {
@@ -11,7 +8,7 @@ export default async function LoginPage(
 ) {
     const searchParams = await props.searchParams
     const error = searchParams?.error === 'true'
-    const message = searchParams?.message
+    const message = typeof searchParams?.message === 'string' ? searchParams.message : undefined
 
     return (
         <main className="min-h-screen bg-black overflow-hidden relative font-sans text-white">
@@ -44,47 +41,7 @@ export default async function LoginPage(
                             <p className="text-gray-400 text-sm">Organiza tu equipo y participa.</p>
                         </div>
 
-                        {error && (
-                            <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm text-center mb-4">
-                                {message || "Ha ocurrido un error al conectar"}
-                            </div>
-                        )}
-
-                        <form className="space-y-6">
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="login-email" className="text-gray-300">Email</Label>
-                                    <Input
-                                        id="login-email"
-                                        name="email"
-                                        type="email"
-                                        placeholder="tu_correo@ejemplo.com"
-                                        required
-                                        className="bg-black/40 border-white/10 text-white placeholder:text-gray-600 focus-visible:ring-[#AAFF00]"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex justify-between items-center">
-                                        <Label htmlFor="login-password" className="text-gray-300">Contraseña</Label>
-                                        <a href="#" className="text-xs text-[#AAFF00] hover:underline">¿Olvidaste tu contraseña?</a>
-                                    </div>
-                                    <Input
-                                        id="login-password"
-                                        name="password"
-                                        type="password"
-                                        required
-                                        className="bg-black/40 border-white/10 text-white focus-visible:ring-[#AAFF00]"
-                                    />
-                                </div>
-                            </div>
-
-                            <Button
-                                formAction={login}
-                                className="w-full bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-bold h-12 rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(170,255,0,0.3)]"
-                            >
-                                Acceder a tu perfil
-                            </Button>
-                        </form>
+                        <LoginForm error={error} message={message} />
 
                     </div>
                 </div>
