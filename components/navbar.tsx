@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon, ArrowLeft } from "lucide-react"
+import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon, ArrowLeft, Bell } from "lucide-react"
 import RegistrationModal from "@/components/registration-modal"
 import { createBrowserClient } from '@supabase/ssr'
 import {
@@ -33,9 +33,11 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("inicio")
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<any>(null)
+  const [unreadAnnouncements, setUnreadAnnouncements] = useState(0)
   const router = useRouter()
   const pathname = usePathname()
   const isLanding = pathname === "/"
+  const isHomePage = pathname === "/home"
 
   useEffect(() => {
     // Scroll handling
@@ -93,6 +95,50 @@ export default function Navbar() {
     }
   }, [])
 
+  // Fetch unread announcements count
+  useEffect(() => {
+    if (!user) return
+
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+
+    const fetchUnreadCount = async () => {
+      const lastSeenStr = localStorage.getItem('announcements_last_seen')
+      const lastSeen = lastSeenStr ? new Date(lastSeenStr) : new Date(0)
+
+      const { data: announcements } = await supabase
+        .from('announcements')
+        .select('id, created_at')
+        .gt('created_at', lastSeen.toISOString())
+
+      setUnreadAnnouncements(announcements?.length || 0)
+    }
+
+    fetchUnreadCount()
+
+    // Subscribe to new announcements
+    const channel = supabase
+      .channel('announcements_changes')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'announcements' }, () => {
+        fetchUnreadCount()
+      })
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [user])
+
+  // Mark announcements as seen when on /home
+  useEffect(() => {
+    if (isHomePage && user) {
+      localStorage.setItem('announcements_last_seen', new Date().toISOString())
+      setUnreadAnnouncements(0)
+    }
+  }, [isHomePage, user])
+
   const handleSignOut = async () => {
     const supabase = createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -107,7 +153,22 @@ export default function Navbar() {
   const renderAuthLinksDesktop = () => {
     if (user && profile) {
       return (
-        <DropdownMenu>
+        <div className="flex items-center gap-2">
+          {/* Notification Bell */}
+          <button
+            onClick={() => router.push('/home')}
+            className="relative p-2 rounded-full hover:bg-white/10 transition-colors"
+            title="Avisos y notificaciones"
+          >
+            <Bell className="w-5 h-5 text-gray-300 hover:text-white" />
+            {unreadAnnouncements > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold bg-red-500 text-white rounded-full animate-pulse">
+                {unreadAnnouncements > 9 ? '9+' : unreadAnnouncements}
+              </span>
+            )}
+          </button>
+
+          <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="ml-4 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-[#AAFF00]">
               <span className="text-sm font-bold text-[#AAFF00]">
@@ -164,7 +225,8 @@ export default function Navbar() {
               <span>Cerrar Sesión</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+          </DropdownMenu>
+        </div>
       )
     }
 
@@ -207,7 +269,15 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
             className="flex items-center px-4 py-3 text-[#AAFF00] hover:bg-[#AAFF00]/10"
           >
-            <HomeIcon className="mr-3 h-5 w-5" /> Panel Principal
+            <div className="relative mr-3">
+              <Bell className="h-5 w-5" />
+              {unreadAnnouncements > 0 && (
+                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[14px] h-[14px] px-0.5 text-[8px] font-bold bg-red-500 text-white rounded-full">
+                  {unreadAnnouncements > 9 ? '9+' : unreadAnnouncements}
+                </span>
+              )}
+            </div>
+            Avisos {unreadAnnouncements > 0 && `(${unreadAnnouncements} nuevos)`}
           </a>
           <a
             href="/equipos"

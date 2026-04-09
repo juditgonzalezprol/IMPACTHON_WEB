@@ -64,6 +64,9 @@ CREATE TABLE public.evaluations (
 ALTER TABLE public.evaluations ENABLE ROW LEVEL SECURITY;
 
 -- 6. Create Events table (Agenda)
+-- Track types: 'todos' (general), 'emprendimiento', 'programacion'
+CREATE TYPE event_track AS ENUM ('todos', 'emprendimiento', 'programacion');
+
 CREATE TABLE public.events (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
@@ -71,9 +74,14 @@ CREATE TABLE public.events (
   start_time TIMESTAMP WITH TIME ZONE NOT NULL,
   end_time TIMESTAMP WITH TIME ZONE NOT NULL,
   location TEXT,
+  track event_track DEFAULT 'todos'::event_track NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- MIGRATION: Si ya existe la tabla, ejecutar esto en su lugar:
+-- CREATE TYPE event_track AS ENUM ('todos', 'emprendimiento', 'programacion');
+-- ALTER TABLE public.events ADD COLUMN track event_track DEFAULT 'todos'::event_track NOT NULL;
 
 -- Enable RLS for events
 ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;
