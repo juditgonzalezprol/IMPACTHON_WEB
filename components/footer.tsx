@@ -28,7 +28,7 @@ export default function Footer() {
                 </a>
                 <p className="text-gray-400 text-sm leading-relaxed max-w-md mb-6">
                   El mayor hackathon de la Universidad de Santiago de Compostela.
-                  Transformando ideas en soluciones con impacto real desde 2023.
+                  Transformando ideas en soluciones con impacto real desde 2025.
                 </p>
               </div>
 

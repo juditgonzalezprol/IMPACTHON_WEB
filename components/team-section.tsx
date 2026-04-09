@@ -69,7 +69,7 @@ const mentorMembers = [
     { name: "Nel Raposeiras", company: "OSIX Tech", initials: "NR", color: "#14B8A6" },
     { name: "David Iglesias", company: "Train2Go", initials: "DI", color: "#F59E0B" },
     { name: "Christian Palou", company: "Theirstack", initials: "CP", color: "#3B82F6" },
-    { name: "Xoe López", company: "Theirstack", initials: "XL", color: "#EF4444" },
+    { name: "Xoel López", company: "Theirstack", initials: "XL", color: "#EF4444" },
     { name: "Iago Lastra", company: "TimeTime", initials: "IL", color: "#10B981" },
     { name: "Daniel Cerqueiro", company: "Docuten", initials: "DC", color: "#A855F7" },
 ]
