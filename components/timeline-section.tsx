@@ -22,7 +22,7 @@ const timelineEvents = [
   {
     icon: Code2,
     title: "Hacking",
-    time: "Viernes 19:00 - Domingo 11:00",
+    time: "Viernes 19:00 - Domingo 10:00",
     description: "36 horas de desarrollo intensivo",
     day: "DIA 1-3",
     featured: true,
@@ -58,7 +58,7 @@ const timelineEvents = [
   {
     icon: Presentation,
     title: "Demos",
-    time: "Domingo 11:00",
+    time: "Domingo 10:00",
     description: "Presentacion de proyectos ante el jurado",
     day: "DIA 3",
   },
