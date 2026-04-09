@@ -1,20 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { Twitter, Instagram, Linkedin, Mail, MapPin, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Instagram, Linkedin, Mail, MapPin } from "lucide-react"
 import RegistrationModal from "@/components/registration-modal"
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/gdgsantiagoes/?hl=es", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/11843951/admin/dashboard/", label: "LinkedIn" },
 ]
 
 export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [email, setEmail] = useState("")
 
   return (
     <>
@@ -34,19 +30,6 @@ export default function Footer() {
                   El mayor hackathon de la Universidad de Santiago de Compostela.
                   Transformando ideas en soluciones con impacto real desde 2023.
                 </p>
-                {/* Newsletter */}
-                <div className="flex gap-2 max-w-sm">
-                  <Input
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#AAFF00] focus:ring-[#AAFF00]/20"
-                  />
-                  <Button className="bg-[#AAFF00] hover:bg-[#BBFF33] text-black font-semibold px-4">
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </div>
               </div>
 
               {/* Quick Links */}

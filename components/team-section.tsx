@@ -61,6 +61,19 @@ const staffMembers = [
     { name: "Lucas García", initials: "LG", color: "#4ADE80" },
 ]
 
+const mentorMembers = [
+    { name: "Nicolás Corbal", company: "OSIX Tech", initials: "NC", color: "#F97316" },
+    { name: "David Gutiérrez", company: "OSIX Tech", initials: "DG", color: "#8B5CF6" },
+    { name: "Juan Freire", company: "OSIX Tech", initials: "JF", color: "#06B6D4" },
+    { name: "Pablo Pazos", company: "OSIX Tech", initials: "PP", color: "#EC4899" },
+    { name: "Nel Raposeiras", company: "OSIX Tech", initials: "NR", color: "#14B8A6" },
+    { name: "David Iglesias", company: "Train2Go", initials: "DI", color: "#F59E0B" },
+    { name: "Christian Palou", company: "Theirstack", initials: "CP", color: "#3B82F6" },
+    { name: "Xoe López", company: "Theirstack", initials: "XL", color: "#EF4444" },
+    { name: "Iago Lastra", company: "TimeTime", initials: "IL", color: "#10B981" },
+    { name: "Daniel Cerqueiro", company: "Docuten", initials: "DC", color: "#A855F7" },
+]
+
 export default function TeamSection() {
     const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.1 })
 
@@ -163,6 +176,34 @@ export default function TeamSection() {
                                     {member.name}
                                 </h4>
                                 <p className="text-xs text-gray-500 mt-1">Staff</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Mentores subsection */}
+                <div className={`mt-16 transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+                    <div className="text-center mb-8">
+                        <span className="inline-block px-3 py-1 text-xs font-bold text-white/60 uppercase tracking-widest border border-white/20 rounded-full">
+                            Mentores
+                        </span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                        {mentorMembers.map((member) => (
+                            <div
+                                key={member.name}
+                                className="group backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-5 text-center hover:border-[#AAFF00]/30 hover:bg-white/10 transition-all duration-300"
+                            >
+                                <div
+                                    className="w-12 h-12 rounded-xl flex items-center justify-center text-black font-black text-sm mx-auto mb-3 group-hover:scale-110 transition-transform"
+                                    style={{ backgroundColor: member.color }}
+                                >
+                                    {member.initials}
+                                </div>
+                                <h4 className="text-sm font-semibold text-white group-hover:text-[#AAFF00] transition-colors leading-tight">
+                                    {member.name}
+                                </h4>
+                                <p className="text-xs text-gray-500 mt-1">{member.company}</p>
                             </div>
                         ))}
                     </div>
