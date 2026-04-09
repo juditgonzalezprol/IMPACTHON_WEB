@@ -40,6 +40,16 @@ const faqs = [
     answer:
       "Este evento es presencial para fomentar la colaboracion y el networking. Sin embargo, si tienes alguna necesidad especial, contactanos y buscaremos una solucion.",
   },
+  {
+    question: "Podemos dormir en la facultad?",
+    answer:
+      "El evento se desarrolla ininterrumpidamente desde el viernes hasta el domingo: la facultad no cierra y el hacking no para ni de dia ni de noche. No hay camas, pero habilitaremos aulas apartadas, a oscuras y en silencio como zona de descanso para echar una siesta. No esperes nada muy comodo — la idea es que sea una experiencia intensiva y descanses despues del evento. Eso si, habra Red Bull y cafe disponibles durante todo el evento para ayudarte a aguantar.",
+  },
+  {
+    question: "Debo llevar comida o pagar por ella alli?",
+    answer:
+      "No, el evento cubre todas las comidas: dos cenas, la comida del sabado, dos desayunos, y snacks, cafes y dulces durante todo el evento. No esperes comida muy fit — piensa en pizza, kebab y cosas rapidas. Eso si, trae una botella de agua para rellenar en las fuentes de la facultad, ya que no proporcionamos otra bebida aparte de estas.",
+  },
 ]
 
 export default function FAQSection() {
