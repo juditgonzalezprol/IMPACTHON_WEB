@@ -22,9 +22,7 @@ const navLinks = [
   { name: "FAQ", href: "/#faq" },
 ]
 
-const authNavLinks = [
-  { name: "Directorio", href: "/directorio" },
-]
+const authNavLinks: { name: string; href: string }[] = []
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
