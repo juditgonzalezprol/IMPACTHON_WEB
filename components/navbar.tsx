@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon } from "lucide-react"
+import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon, ArrowLeft } from "lucide-react"
 import RegistrationModal from "@/components/registration-modal"
 import { createBrowserClient } from '@supabase/ssr'
 import {
@@ -34,6 +34,8 @@ export default function Navbar() {
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<any>(null)
   const router = useRouter()
+  const pathname = usePathname()
+  const isLanding = pathname === "/"
 
   useEffect(() => {
     // Scroll handling
@@ -283,40 +285,52 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Desktop Navigation - Center */}
-            <div className="hidden md:flex items-center gap-2 lg:gap-4 flex-1 justify-center">
-              {navLinks.map((link) => {
-                const linkAny = link as any
-                const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target={linkAny.external ? "_blank" : undefined}
-                    rel={linkAny.external ? "noopener noreferrer" : undefined}
-                    className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg ${isActive
-                      ? "text-[#AAFF00]"
-                      : "text-gray-300 hover:text-white hover:text-[#AAFF00]"
-                      }`}
-                  >
-                    {link.name}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#AAFF00] rounded-full" />
-                    )}
-                  </a>
-                )
-              })}
+            {/* Desktop Navigation - Center (landing) or Left (user pages) */}
+            {isLanding ? (
+              <div className="hidden md:flex items-center gap-2 lg:gap-4 flex-1 justify-center">
+                {navLinks.map((link) => {
+                  const linkAny = link as any
+                  const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target={linkAny.external ? "_blank" : undefined}
+                      rel={linkAny.external ? "noopener noreferrer" : undefined}
+                      className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg ${isActive
+                        ? "text-[#AAFF00]"
+                        : "text-gray-300 hover:text-white hover:text-[#AAFF00]"
+                        }`}
+                    >
+                      {link.name}
+                      {isActive && (
+                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#AAFF00] rounded-full" />
+                      )}
+                    </a>
+                  )
+                })}
 
-              {user && authNavLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="relative px-4 py-2 font-medium transition-all duration-300 rounded-lg text-gray-300 hover:text-white hover:text-[#AAFF00]"
-                  >
-                    {link.name}
-                  </a>
-                ))}
-            </div>
+                {user && authNavLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className="relative px-4 py-2 font-medium transition-all duration-300 rounded-lg text-gray-300 hover:text-white hover:text-[#AAFF00]"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center flex-1">
+                <a
+                  href="/"
+                  className="flex items-center gap-2 px-4 py-2 font-medium text-gray-300 hover:text-[#AAFF00] transition-all duration-300 rounded-lg"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Volver a la landing
+                </a>
+              </div>
+            )}
 
             {/* Desktop Auth - Right */}
             <div className="hidden md:flex items-center">
@@ -353,37 +367,50 @@ export default function Navbar() {
               }`}
           >
             <div className="py-4 border-t border-white/10 flex flex-col">
-              {navLinks.map((link, index) => {
-                const linkAny = link as any
-                const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target={linkAny.external ? "_blank" : undefined}
-                    rel={linkAny.external ? "noopener noreferrer" : undefined}
-                    className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 ${isActive
-                      ? "text-[#AAFF00] bg-[#AAFF00]/10"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
-                      }`}
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                )
-              })}
+              {isLanding ? (
+                <>
+                  {navLinks.map((link, index) => {
+                    const linkAny = link as any
+                    const isActive = !linkAny.external && activeSection === link.href.split('#')[1]
+                    return (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        target={linkAny.external ? "_blank" : undefined}
+                        rel={linkAny.external ? "noopener noreferrer" : undefined}
+                        className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 ${isActive
+                          ? "text-[#AAFF00] bg-[#AAFF00]/10"
+                          : "text-gray-300 hover:text-white hover:bg-white/5"
+                          }`}
+                        style={{ animationDelay: `${index * 50}ms` }}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.name}
+                      </a>
+                    )
+                  })}
 
-              {user && authNavLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="block px-4 py-3 rounded-lg font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                  {user && authNavLinks.map((link) => (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        className="block px-4 py-3 rounded-lg font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.name}
+                      </a>
+                    ))}
+                </>
+              ) : (
+                <a
+                  href="/"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg font-medium text-gray-300 hover:text-[#AAFF00] hover:bg-white/5 transition-all duration-300"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Volver a la landing
+                </a>
+              )}
 
               {renderAuthLinksMobile()}
             </div>
