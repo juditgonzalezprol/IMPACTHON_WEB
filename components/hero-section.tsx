@@ -66,7 +66,7 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 export default function HeroSection() {
   const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
-  const targetDate = new Date("2026-04-10T09:00:00")
+  const targetDate = new Date("2026-04-10T17:00:00+02:00")
 
   useEffect(() => {
     setIsLoaded(true)

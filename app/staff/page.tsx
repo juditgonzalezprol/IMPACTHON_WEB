@@ -88,6 +88,14 @@ export default async function StaffDashboardPage() {
                                 <label className="text-xs text-gray-400">Ubicación *</label>
                                 <Input name="location" required className="bg-black/50 border-white/20" placeholder="Ej: Auditorio Principal" />
                             </div>
+                            <div className="space-y-2">
+                                <label className="text-xs text-gray-400">Track / Dirigido a *</label>
+                                <select name="track" required className="w-full h-10 px-3 rounded-md bg-black/50 border border-white/20 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#AAFF00]/50">
+                                    <option value="todos">Todos los participantes</option>
+                                    <option value="emprendimiento">Emprendimiento</option>
+                                    <option value="programacion">Programación</option>
+                                </select>
+                            </div>
                             <Button type="submit" className="w-full bg-[#AAFF00] text-black hover:bg-[#BBFF33] font-bold">
                                 Publicar Evento en Agenda
                             </Button>
@@ -98,7 +106,18 @@ export default async function StaffDashboardPage() {
                             {events?.map(event => (
                                 <div key={event.id} className="p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition flex justify-between items-center group">
                                     <div>
-                                        <h4 className="font-bold">{event.title}</h4>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <h4 className="font-bold">{event.title}</h4>
+                                            {event.track && event.track !== 'todos' && (
+                                                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                                                    event.track === 'emprendimiento'
+                                                        ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                                                        : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                                                }`}>
+                                                    {event.track === 'emprendimiento' ? 'Emprende' : 'Dev'}
+                                                </span>
+                                            )}
+                                        </div>
                                         <p className="text-xs text-[#AAFF00]">{new Date(event.start_time).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })} - {event.location}</p>
                                     </div>
                                     <form action={async (fd) => { "use server"; await deleteEvent(fd); }}>

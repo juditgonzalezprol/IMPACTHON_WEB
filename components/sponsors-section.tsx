@@ -19,7 +19,7 @@ const oro: Sponsor[] = [
 
 const plata: Sponsor[] = [
   { name: "Dinahosting", logo: "/patrocinadores/dinahosting-white.svg" },
-  { name: "Red Bull", logo: "/patrocinadores/redbull-color.svg" },
+  { name: "Red Bull Basement", logo: "/patrocinadores/basement.webp" },
   { name: "Raiola", logo: "/patrocinadores/raiola.png" },
 ]
 

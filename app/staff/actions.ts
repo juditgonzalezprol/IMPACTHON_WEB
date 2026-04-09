@@ -36,14 +36,16 @@ export async function createEvent(formData: FormData) {
     const location = formData.get('location') as string
     const start_time = formData.get('start_time') as string
     const end_time = formData.get('end_time') as string
+    const track = (formData.get('track') as string) || 'todos'
 
     const { error } = await supabase
         .from('events')
-        .insert({ title, description, location, start_time, end_time })
+        .insert({ title, description, location, start_time, end_time, track })
 
     if (error) return { error: error.message }
 
     revalidatePath('/')
+    revalidatePath('/home')
     revalidatePath('/staff')
     return { success: true }
 }
