@@ -116,7 +116,7 @@ CREATE TRIGGER update_deliverables_modtime
 -- (Reemplazar título, descripción y document_url con la info real)
 -- ============================================
 INSERT INTO public.challenges (title, description, document_url) VALUES
-  ('Reto 1', 'Descripción del primer reto. Pendiente de completar.', 'https://example.com/reto-1'),
-  ('Reto 2', 'Descripción del segundo reto. Pendiente de completar.', 'https://example.com/reto-2'),
-  ('Reto 3', 'Descripción del tercer reto. Pendiente de completar.', 'https://example.com/reto-3'),
-  ('Reto 4', 'Descripción del cuarto reto. Pendiente de completar.', 'https://example.com/reto-4');
+  ('LocalFold — Cátedra Camelia', 'Crea una interfaz web intuitiva para predicción de estructuras de proteínas con AlphaFold2, conectada al supercomputador CESGA Finis Terrae III. El objetivo es hacer accesible la predicción de proteínas a investigadores sin formación técnica, a través de un portal web completo. Contarás con una API simulada del CESGA con 22 proteínas de prueba.', 'https://example.com/reto-camelia'),
+  ('Make Me Want to Travel — Eurostars', 'Transforma datos reales de clientes y reservas hoteleras en decisiones de marketing accionables. Eurostars Hotel Company proporciona datasets reales de clientes y hoteles para que construyas soluciones de IA que ayuden al equipo de marketing a tomar decisiones más rápidas y efectivas en un sector con demanda muy variable.', 'https://example.com/reto-eurostars'),
+  ('Por un uso responsable del móvil — GEM Galicia', 'Diseña una solución tecnológica que ayude a jóvenes de 10 a 25 años a reducir el uso improductivo del móvil y sus consecuencias: aislamiento social, adicción, problemas de salud mental y bajo rendimiento académico. El Observatorio GEM Galicia busca ideas innovadoras con impacto real en bienestar digital.', 'https://example.com/reto-gem'),
+  ('Herramientas Cloud — GDG Santiago', 'Reto transversal: aprovecha créditos de Google Cloud, herramientas de IA de Google y la plataforma Antigravity para potenciar tu proyecto. Todos los equipos reciben créditos cloud y acceso a herramientas que pueden aplicar a cualquiera de los otros retos.', 'https://example.com/reto-gdg');

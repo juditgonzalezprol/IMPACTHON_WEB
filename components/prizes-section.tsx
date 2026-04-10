@@ -2,7 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { Trophy, Briefcase, Code, Gift } from "lucide-react"
+import { Trophy, Briefcase, Code, Dna, Hotel, Smartphone, Cloud } from "lucide-react"
 
 export default function PrizesSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({
@@ -143,19 +143,54 @@ export default function PrizesSection() {
 
         {/* Premios por reto */}
         <div
-          className={`mt-8 sm:mt-12 backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl px-8 py-5 transition-all duration-700 flex items-center gap-5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`mt-8 sm:mt-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ transitionDelay: "300ms" }}
         >
-          <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#AAFF00]/10">
-            <Gift className="w-6 h-6 text-[#AAFF00]/60" />
-          </div>
-          <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
-              Premios <span className="text-[#AAFF00]">por Reto</span>
-            </h3>
-            <p className="text-gray-400 text-base">
-              Ademas de los premios generales, cada reto cuenta con sus propios premios especificos, propuestos y patrocinados por la empresa u organizacion que lo plantea. Estos se anunciaran junto con los detalles de cada reto.
-            </p>
+          <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+            <Trophy className="w-6 h-6 text-[#AAFF00]" />
+            Premios por Reto
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Camelia */}
+            <div className="p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Dna className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-bold uppercase text-emerald-400">Camelia</span>
+              </div>
+              <p className="text-gray-300 text-sm">
+                Continuar el desarrollo del proyecto en CiTIUS y el ecosistema de la Cátedra CAMELIA, con acompañamiento de investigadores expertos hacia una aplicación real.
+              </p>
+            </div>
+            {/* Eurostars */}
+            <div className="p-5 rounded-xl bg-blue-500/5 border border-blue-500/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Hotel className="w-4 h-4 text-blue-400" />
+                <span className="text-xs font-bold uppercase text-blue-400">Eurostars</span>
+              </div>
+              <p className="text-gray-300 text-sm">
+                Dos noches de hotel por persona del equipo ganador (habitación doble con desayuno incluido).
+              </p>
+            </div>
+            {/* GEM */}
+            <div className="p-5 rounded-xl bg-purple-500/5 border border-purple-500/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Smartphone className="w-4 h-4 text-purple-400" />
+                <span className="text-xs font-bold uppercase text-purple-400">GEM Galicia</span>
+              </div>
+              <p className="text-gray-300 text-sm">
+                Pendiente de anunciar. Vinculado a formación en emprendimiento y competencias transversales.
+              </p>
+            </div>
+            {/* GDG Cloud */}
+            <div className="p-5 rounded-xl bg-orange-500/5 border border-orange-500/20">
+              <div className="flex items-center gap-2 mb-3">
+                <Cloud className="w-4 h-4 text-orange-400" />
+                <span className="text-xs font-bold uppercase text-orange-400">GDG Cloud</span>
+              </div>
+              <p className="text-gray-300 text-sm">
+                Créditos de Google Cloud para todos los participantes + acceso a herramientas de IA y plataforma Antigravity.
+              </p>
+            </div>
           </div>
         </div>
       </div>
