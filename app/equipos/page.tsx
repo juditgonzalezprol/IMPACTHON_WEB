@@ -43,7 +43,24 @@ export default async function EquiposPage() {
     `)
         .order('created_at', { ascending: false })
 
-    // 4. Find if the current user is in a team
+    // 4. Fetch challenges and registrations
+    const { data: challenges } = await supabase
+        .from('challenges')
+        .select('id, title')
+        .order('created_at')
+
+    const { data: allRegistrations } = await supabase
+        .from('challenge_registrations')
+        .select('team_id, challenge_id')
+
+    // Build a map: team_id -> Set of challenge_ids
+    const teamChallenges: Record<string, Set<string>> = {}
+    allRegistrations?.forEach(r => {
+        if (!teamChallenges[r.team_id]) teamChallenges[r.team_id] = new Set()
+        teamChallenges[r.team_id].add(r.challenge_id)
+    })
+
+    // 5. Find if the current user is in a team
     let myTeamId = null
     if (teams) {
         for (const team of teams) {
@@ -105,6 +122,8 @@ export default async function EquiposPage() {
                             team={team}
                             isMyTeam={myTeamId === team.id}
                             userIsInAnotherTeam={myTeamId !== null && myTeamId !== team.id}
+                            challenges={challenges || []}
+                            registeredChallengeIds={Array.from(teamChallenges[team.id] || [])}
                         />
                     ))}
 

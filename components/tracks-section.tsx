@@ -2,7 +2,46 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { HelpCircle } from "lucide-react"
+import { Dna, Hotel, Smartphone, Cloud } from "lucide-react"
+
+const challenges = [
+  {
+    icon: Dna,
+    sponsor: "Cátedra Camelia",
+    title: "LocalFold",
+    description: "Crea una interfaz web intuitiva para predicción de estructuras de proteínas con AlphaFold2, conectada al supercomputador CESGA Finis Terrae III.",
+    color: "from-emerald-500/20 to-emerald-500/5",
+    borderColor: "border-emerald-500/30",
+    tagColor: "text-emerald-400 border-emerald-400/30",
+  },
+  {
+    icon: Hotel,
+    sponsor: "Eurostars Hotel Company",
+    title: "Make Me Want to Travel",
+    description: "Transforma datos reales de clientes y reservas hoteleras en decisiones de marketing accionables mediante IA y análisis de datos.",
+    color: "from-blue-500/20 to-blue-500/5",
+    borderColor: "border-blue-500/30",
+    tagColor: "text-blue-400 border-blue-400/30",
+  },
+  {
+    icon: Smartphone,
+    sponsor: "Observatorio GEM Galicia",
+    title: "Por un uso responsable del móvil",
+    description: "Diseña una solución que ayude a jóvenes de 10 a 25 años a reducir el uso improductivo del móvil y sus consecuencias en salud y rendimiento.",
+    color: "from-purple-500/20 to-purple-500/5",
+    borderColor: "border-purple-500/30",
+    tagColor: "text-purple-400 border-purple-400/30",
+  },
+  {
+    icon: Cloud,
+    sponsor: "GDG Santiago",
+    title: "Herramientas Cloud",
+    description: "Reto transversal: aprovecha créditos de Google Cloud, herramientas de IA de Google y la plataforma Antigravity para potenciar tu proyecto.",
+    color: "from-orange-500/20 to-orange-500/5",
+    borderColor: "border-orange-500/30",
+    tagColor: "text-orange-400 border-orange-400/30",
+  },
+]
 
 export default function TracksSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({
@@ -44,34 +83,37 @@ export default function TracksSection() {
             </span>
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg mb-4">
-            Diversas catedras, empresas, organizaciones y grupos de investigacion proponen lineas de trabajo especificas con premios, tecnologias y mentoria personalizados.
+            Empresas, cátedras y organizaciones proponen retos reales con premios, tecnologías y mentoría propios.
           </p>
           <p className="text-gray-500 max-w-3xl mx-auto text-base">
-            Cada equipo puede presentarse a tantos retos como desee con el mismo proyecto, optando <span className="text-white font-semibold">siempre</span> a los premios generales de desarrollo y emprendimiento. Cuando los anunciemos, cada reto incluira una descripcion, el nombre y logo de la entidad que lo propone, y sus premios.
+            Cada equipo puede presentarse a tantos retos como desee con el mismo proyecto, optando <span className="text-white font-semibold">siempre</span> a los premios generales de desarrollo y emprendimiento.
           </p>
         </div>
 
-        {/* 3 Placeholder cards */}
+        {/* Challenge cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className={`relative backdrop-blur-md bg-white/5 border border-dashed border-[#AAFF00]/30 rounded-2xl p-8 transition-all duration-700 flex flex-col items-center justify-center min-h-[280px] ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#AAFF00]/10 mb-6">
-                <HelpCircle className="w-8 h-8 text-[#AAFF00]/50" />
+          {challenges.map((c, i) => {
+            const Icon = c.icon
+            return (
+              <div
+                key={i}
+                className={`relative backdrop-blur-md bg-gradient-to-br ${c.color} border ${c.borderColor} rounded-2xl p-7 transition-all duration-700 flex flex-col min-h-[280px] hover:scale-[1.02] hover:shadow-lg ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  }`}
+                style={{ transitionDelay: `${i * 150}ms` }}
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 mb-5">
+                  <Icon className="w-7 h-7 text-white" />
+                </div>
+                <span className={`inline-block self-start px-3 py-1 text-[10px] font-bold uppercase tracking-widest border rounded-full mb-3 ${c.tagColor}`}>
+                  {c.sponsor}
+                </span>
+                <h3 className="text-xl font-bold text-white mb-2">{c.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed flex-1">
+                  {c.description}
+                </p>
               </div>
-              <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00]/60 uppercase tracking-widest border border-[#AAFF00]/20 rounded-full mb-4">
-                Reto {i}
-              </span>
-              <h3 className="text-2xl font-bold text-white/30 mb-2">To Be Announced</h3>
-              <p className="text-gray-600 text-sm text-center">
-                Proximamente se revelara la entidad y los detalles de este reto.
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

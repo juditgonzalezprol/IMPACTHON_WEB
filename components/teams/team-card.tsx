@@ -6,16 +6,20 @@ import { joinTeam, leaveTeam, updateTeam } from "@/app/equipos/actions"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { Edit2, Users, ArrowRight, Github, ExternalLink } from "lucide-react"
+import { Edit2, Users, ArrowRight, Github, ExternalLink, Target, CheckCircle2, Circle } from "lucide-react"
 
 export default function TeamCard({
     team,
     isMyTeam,
-    userIsInAnotherTeam
+    userIsInAnotherTeam,
+    challenges = [],
+    registeredChallengeIds = [],
 }: {
     team: any
     isMyTeam: boolean
     userIsInAnotherTeam: boolean
+    challenges?: { id: string; title: string }[]
+    registeredChallengeIds?: string[]
 }) {
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
@@ -94,7 +98,7 @@ export default function TeamCard({
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#AAFF00]/10 rounded-full blur-2xl" />
             )}
 
-            <div className="flex justify-between items-start mb-4">
+            <div className="flex justify-between items-start mb-3">
                 <h3 className="text-xl font-bold text-white">{team.name}</h3>
                 <div className="flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-sm">
                     <Users size={14} className="text-[#AAFF00]" />
@@ -103,6 +107,32 @@ export default function TeamCard({
                     </span>
                 </div>
             </div>
+
+            {/* Retos */}
+            {challenges.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                    {challenges.map((c) => {
+                        const isActive = registeredChallengeIds.includes(c.id)
+                        return (
+                            <div
+                                key={c.id}
+                                title={c.title}
+                                className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all ${
+                                    isActive
+                                        ? "bg-[#AAFF00]/15 border-[#AAFF00]/40 text-[#AAFF00]"
+                                        : "bg-white/5 border-white/10 text-gray-600"
+                                }`}
+                            >
+                                {isActive
+                                    ? <CheckCircle2 size={10} />
+                                    : <Circle size={10} />
+                                }
+                                <span className="truncate max-w-[80px]">{c.title}</span>
+                            </div>
+                        )
+                    })}
+                </div>
+            )}
 
             {isEditing ? (
                 <div className="space-y-3 mb-6">

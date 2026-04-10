@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon, ArrowLeft, Bell } from "lucide-react"
+import { Menu, X, User, LogOut, Code, Users, ShieldCheck, Gavel, ShieldAlert, HomeIcon, ArrowLeft, Bell, Target } from "lucide-react"
 import RegistrationModal from "@/components/registration-modal"
 import { createBrowserClient } from '@supabase/ssr'
 import {
@@ -194,6 +194,10 @@ export default function Navbar() {
               <Users className="mr-2 h-4 w-4" />
               <span>Dashboard Equipos</span>
             </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer hover:bg-[#AAFF00]/10 focus:bg-[#AAFF00]/10 text-[#AAFF00]" onClick={() => router.push('/retos')}>
+              <Target className="mr-2 h-4 w-4" />
+              <span>Retos y Entregables</span>
+            </DropdownMenuItem>
 
             {/* Role-based Links */}
             {(profile.role === 'Staff' || profile.role === 'Organizador') && (
@@ -283,6 +287,13 @@ export default function Navbar() {
             className="flex items-center px-4 py-3 text-gray-300 hover:text-white"
           >
             <Users className="mr-3 h-5 w-5" /> Dashboard Equipos
+          </a>
+          <a
+            href="/retos"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center px-4 py-3 text-[#AAFF00] hover:bg-[#AAFF00]/10"
+          >
+            <Target className="mr-3 h-5 w-5" /> Retos y Entregables
           </a>
 
           {profile.role === 'Organizador' && (
