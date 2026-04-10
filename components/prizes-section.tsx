@@ -2,7 +2,7 @@
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { useScrollColor } from "@/hooks/use-scroll-color"
-import { Trophy, Briefcase, Code, Dna, Hotel, Smartphone, Cloud } from "lucide-react"
+import { Trophy, Zap, Dna, Hotel, Smartphone, Cloud } from "lucide-react"
 
 export default function PrizesSection() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({
@@ -54,91 +54,46 @@ export default function PrizesSection() {
             {" "}del Hackathon
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            Todos los proyectos, independientemente de los retos a los que se presenten, optan automaticamente a los premios generales de desarrollo y emprendimiento.
+            Todos los proyectos, independientemente de los retos a los que se presenten, optan automaticamente a los premios generales. Se premia a los mejores equipos en conjunto.
           </p>
         </div>
 
-        {/* Two main categories */}
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Desarrollo */}
-          <div
-            className={`backdrop-blur-md bg-gradient-to-br from-[#AAFF00]/10 to-transparent border border-[#AAFF00]/30 rounded-2xl p-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-            style={{ transitionDelay: "100ms" }}
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#AAFF00]/20 mb-6">
-              <Code className="w-8 h-8 text-[#AAFF00]" />
+        {/* Premio general - ALAS */}
+        <div
+          className={`backdrop-blur-md bg-gradient-to-br from-[#AAFF00]/10 to-transparent border border-[#AAFF00]/30 rounded-2xl p-8 sm:p-10 transition-all duration-700 max-w-3xl mx-auto ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          style={{ transitionDelay: "100ms" }}
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[#AAFF00]/20 mb-6">
+              <Zap className="w-10 h-10 text-[#AAFF00]" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-              Linea <span className="text-[#AAFF00]">/DESARROLLO/</span>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+              Premio <span className="text-[#AAFF00]">ALAS</span>
             </h3>
-            <p className="text-gray-400 mb-8">
-              Se valora la calidad tecnica del proyecto: arquitectura, codigo, funcionalidad, uso de tecnologias y ejecucion.
+            <p className="text-gray-400">
+              Se valora el conjunto del proyecto: calidad tecnica, innovacion, impacto y presentacion.
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#AAFF00]/20">
-                    <Trophy className="w-7 h-7 text-[#AAFF00]" />
-                  </div>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">1er Premio por equipo</p>
-                  <p className="text-3xl font-bold text-[#AAFF00]">???€</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/10">
-                    <Trophy className="w-7 h-7 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">2do Premio por equipo</p>
-                  <p className="text-3xl font-bold text-white">???€</p>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Emprendimiento */}
-          <div
-            className={`backdrop-blur-md bg-gradient-to-br from-[#AAFF00]/10 to-transparent border border-[#AAFF00]/30 rounded-2xl p-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-            style={{ transitionDelay: "200ms" }}
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#AAFF00]/20 mb-6">
-              <Briefcase className="w-8 h-8 text-[#AAFF00]" />
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-              Linea <span className="text-[#AAFF00]">/EMPRENDIMIENTO/</span>
-            </h3>
-            <p className="text-gray-400 mb-8">
-              Se valora el caracter innovador, el potencial empresarial y el impacto social del proyecto.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-5 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#AAFF00]/20">
                     <Trophy className="w-7 h-7 text-[#AAFF00]" />
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">1er Premio por equipo</p>
-                  <p className="text-3xl font-bold text-[#AAFF00]">???€</p>
+                  <p className="text-gray-400 text-sm mb-1">Equipo ganador</p>
+                  <p className="text-xl font-bold text-[#AAFF00]">Red Bull durante 1 año</p>
+                  <p className="text-gray-500 text-xs mt-0.5">Para todo el equipo</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6 p-5 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/10">
-                    <Trophy className="w-7 h-7 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">2do Premio por equipo</p>
-                  <p className="text-3xl font-bold text-white">???€</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
+          <p className="text-center text-gray-500 text-sm mt-4">
+            Dos equipos ganadores con el mismo premio — no hay primero ni segundo.
+          </p>
         </div>
 
         {/* Premios por reto */}
