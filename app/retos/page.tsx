@@ -64,6 +64,8 @@ export default async function RetosPage() {
     let team = null
     let teamMembers: any[] = []
     let deliverables: any[] = []
+    let myRegistrations: { challenge_id: string; github_url: string | null }[] = []
+    let registeredChallenges: { id: string; title: string; is_transversal: boolean }[] = []
 
     if (myTeamId) {
         const { data: teamData } = await supabase
@@ -82,11 +84,28 @@ export default async function RetosPage() {
 
         const { data: dels } = await supabase
             .from('deliverables')
-            .select('*')
+            .select('*, challenges:challenge_id (id, title)')
             .eq('team_id', myTeamId)
             .order('created_at')
 
         deliverables = dels || []
+
+        // Fetch per-challenge registration data (including github_url per challenge)
+        const { data: regs } = await supabase
+            .from('challenge_registrations')
+            .select('challenge_id, github_url')
+            .eq('team_id', myTeamId)
+        myRegistrations = regs || []
+
+        // Fetch challenge details for the ones we're registered to
+        if (myRegistrations.length > 0) {
+            const { data: chData } = await supabase
+                .from('challenges')
+                .select('id, title, is_transversal')
+                .in('id', myRegistrations.map(r => r.challenge_id))
+                .order('created_at')
+            registeredChallenges = chData || []
+        }
     }
 
     return (
@@ -211,11 +230,14 @@ export default async function RetosPage() {
                                 teamId={team.id}
                                 initialDescription={team.description}
                                 initialGithubUrl={team.github_url}
+                                registeredChallenges={registeredChallenges}
+                                registrations={myRegistrations}
                             />
                             <hr className="border-white/10" />
                             <DeliverableList
                                 teamId={team.id}
                                 deliverables={deliverables}
+                                registeredChallenges={registeredChallenges}
                             />
                         </div>
                     ) : (

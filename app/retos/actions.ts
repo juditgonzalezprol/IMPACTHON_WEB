@@ -58,10 +58,17 @@ export async function addDeliverable(formData: FormData) {
     const title = formData.get('title') as string
     const description = formData.get('description') as string
     const url = formData.get('url') as string
+    const challengeId = (formData.get('challenge_id') as string) || null
 
     const { error } = await supabase
         .from('deliverables')
-        .insert({ team_id: teamId, title, description: description || null, url })
+        .insert({
+            team_id: teamId,
+            title,
+            description: description || null,
+            url,
+            challenge_id: challengeId,
+        })
 
     if (error) {
         return { error: 'Error al añadir entregable: ' + error.message }
@@ -122,14 +129,25 @@ export async function updateRepoUrl(formData: FormData) {
 
     const teamId = formData.get('team_id') as string
     const githubUrl = formData.get('github_url') as string
+    const challengeId = (formData.get('challenge_id') as string) || null
 
-    const { error } = await supabase
-        .from('teams')
-        .update({ github_url: githubUrl })
-        .eq('id', teamId)
+    if (challengeId) {
+        // Repo per challenge registration
+        const { error } = await supabase
+            .from('challenge_registrations')
+            .update({ github_url: githubUrl })
+            .eq('team_id', teamId)
+            .eq('challenge_id', challengeId)
 
-    if (error) {
-        return { error: error.message }
+        if (error) return { error: error.message }
+    } else {
+        // Legacy: team-level repo
+        const { error } = await supabase
+            .from('teams')
+            .update({ github_url: githubUrl })
+            .eq('id', teamId)
+
+        if (error) return { error: error.message }
     }
 
     revalidatePath('/retos')

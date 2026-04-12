@@ -1,70 +1,67 @@
 import Navbar from "@/components/navbar"
 import { createClient } from "@/lib/supabase/server"
 import { notFound, redirect } from "next/navigation"
-import { Gavel, Github, ExternalLink, Trophy } from "lucide-react"
-import EvaluationForm from "@/components/evaluation-form"
+import Link from "next/link"
+import { Gavel, Target, ChevronRight } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
 export default async function JuradoDashboardPage() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+    if (!user) redirect('/login')
 
-    if (!user) {
-        redirect('/login')
-    }
-
-    // Verify Jurado or Organizador Role
     const { data: profile } = await supabase
         .from('profiles')
-        .select('role')
+        .select('role, full_name')
         .eq('id', user.id)
         .single()
 
     if (profile?.role !== 'Jurado' && profile?.role !== 'Organizador') {
-        notFound() // Show 404 to unauthorized users
+        notFound()
     }
 
-    // Fetch all teams that have either a GitHub URL or a Demo URL
-    const { data: teamsWithProjects } = await supabase
-        .from('teams')
-        .select(`
-            id,
-            name,
-            description,
-            github_url,
-            demo_url,
-            evaluations (
-                id,
-                jury_id,
-                score_idea,
-                score_execution,
-                score_presentation,
-                feedback
-            )
-        `)
-        .or('github_url.not.is.null,demo_url.not.is.null') // Only teams with submissions
-        .order('created_at', { ascending: false })
+    // Retos asignados al juez. Si es Organizador, ve todos los que tengan jurado.
+    let assignedChallenges: { id: string; title: string; description: string }[] = []
+
+    if (profile?.role === 'Organizador') {
+        const { data } = await supabase
+            .from('challenges')
+            .select('id, title, description')
+            .eq('has_jury', true)
+            .order('created_at')
+        assignedChallenges = data || []
+    } else {
+        const { data } = await supabase
+            .from('jury_assignments')
+            .select('challenges (id, title, description)')
+            .eq('jury_id', user.id)
+        assignedChallenges = (data || [])
+            .map((row: any) => row.challenges)
+            .filter(Boolean)
+    }
+
+    // Para cada reto, contar equipos inscritos y evaluaciones ya hechas por mí
+    const challengeStats = await Promise.all(
+        assignedChallenges.map(async (ch) => {
+            const { count: teamsCount } = await supabase
+                .from('challenge_registrations')
+                .select('team_id', { count: 'exact', head: true })
+                .eq('challenge_id', ch.id)
+
+            const { count: myEvalsCount } = await supabase
+                .from('evaluations')
+                .select('id', { count: 'exact', head: true })
+                .eq('challenge_id', ch.id)
+                .eq('jury_id', user.id)
+
+            return { ...ch, teamsCount: teamsCount || 0, myEvalsCount: myEvalsCount || 0 }
+        })
+    )
 
     return (
         <main className="min-h-screen bg-black overflow-hidden relative font-sans text-white pb-20">
-            {/* Background */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div
-                    className="w-full h-full"
-                    style={{
-                        backgroundImage: `
-              radial-gradient(circle at 1px 1px, rgba(170, 255, 0, 0.08) 1px, transparent 1px),
-              linear-gradient(45deg, rgba(170, 255, 0, 0.02) 25%, transparent 25%),
-              linear-gradient(-45deg, rgba(170, 255, 0, 0.02) 25%, transparent 25%)
-            `,
-                        backgroundSize: '50px 50px, 100px 100px, 100px 100px',
-                        backgroundPosition: '0 0, 0 0, 10px 10px',
-                        opacity: 1,
-                    }}
-                />
-            </div>
-
+            <BackgroundGrid />
             <Navbar />
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
@@ -74,68 +71,78 @@ export default async function JuradoDashboardPage() {
                     </div>
                     <div>
                         <h1 className="text-4xl font-bold">Dashboard del Jurado</h1>
-                        <p className="text-gray-400">Revisa y evalúa los proyectos entregados por los equipos.</p>
+                        <p className="text-gray-400">
+                            Hola, {profile?.full_name}. Selecciona un reto para evaluar a sus equipos.
+                        </p>
                     </div>
                 </div>
 
-                <div className="mb-12">
-                    <div className="flex items-center gap-2 mb-6">
-                        <Trophy className="text-[#AAFF00] w-6 h-6" />
-                        <h2 className="text-2xl font-bold">Proyectos a Evaluar ({teamsWithProjects?.length || 0})</h2>
+                {challengeStats.length === 0 ? (
+                    <div className="p-8 rounded-2xl border border-white/10 bg-white/5 text-center">
+                        <p className="text-gray-400">
+                            Aún no estás asignado a ningún reto. Habla con un Organizador.
+                        </p>
                     </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {challengeStats.map((ch) => {
+                            const completed = ch.myEvalsCount
+                            const total = ch.teamsCount
+                            const pct = total > 0 ? Math.round((completed / total) * 100) : 0
 
-                    {teamsWithProjects?.length === 0 ? (
-                        <div className="p-8 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm text-center">
-                            <p className="text-gray-500 italic">Todavía no hay ningún proyecto entregado para evaluar.</p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 gap-8">
-                            {teamsWithProjects?.map((team) => {
-                                // Find if current user has already evaluated this team
-                                const myEvaluation = team.evaluations?.find(e => e.jury_id === user.id)
-
-                                return (
-                                    <div key={team.id} className="p-6 md:p-8 rounded-3xl border border-white/10 bg-white/5 shadow-lg flex flex-col md:flex-row gap-8">
-
-                                        {/* Project Info */}
-                                        <div className="flex-1">
-                                            <div className="flex justify-between items-start mb-2">
-                                                <h3 className="text-2xl font-bold text-white mb-2">{team.name}</h3>
-                                                {myEvaluation && (
-                                                    <span className="px-2 py-1 bg-[#AAFF00]/10 border border-[#AAFF00]/20 text-[#AAFF00] text-xs font-bold rounded-md whitespace-nowrap">
-                                                        Ya Evaluado ✅
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            <p className="text-gray-400 text-sm mb-6 whitespace-pre-wrap">{team.description}</p>
-
-                                            <div className="flex flex-wrap gap-3">
-                                                {team.github_url && (
-                                                    <a href={team.github_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm bg-black hover:bg-white/10 px-4 py-2 rounded-lg text-gray-300 border border-white/10 transition-colors">
-                                                        <Github size={16} /> Ver Repositorio
-                                                    </a>
-                                                )}
-                                                {team.demo_url && (
-                                                    <a href={team.demo_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm bg-[#00E5FF]/10 border border-[#00E5FF]/20 hover:bg-[#00E5FF]/20 px-4 py-2 rounded-lg text-[#00E5FF] transition-colors">
-                                                        <ExternalLink size={16} /> Ver Presentación/Demo
-                                                    </a>
-                                                )}
-                                            </div>
+                            return (
+                                <Link
+                                    key={ch.id}
+                                    href={`/jurado/${ch.id}`}
+                                    className="group p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/30 transition-all"
+                                >
+                                    <div className="flex items-start justify-between mb-3">
+                                        <div className="flex items-center gap-2">
+                                            <Target className="w-5 h-5 text-purple-400" />
+                                            <h3 className="text-xl font-bold">{ch.title}</h3>
                                         </div>
-
-                                        {/* Evaluation Form */}
-                                        <div className="w-full md:w-80 flex-shrink-0 bg-black/40 p-5 rounded-2xl border border-white/5">
-                                            <EvaluationForm teamId={team.id} existingEvaluation={myEvaluation} />
-                                        </div>
+                                        <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" />
                                     </div>
-                                )
-                            })}
-                        </div>
-                    )}
-                </div>
+                                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">{ch.description}</p>
 
+                                    <div className="flex items-center justify-between text-xs">
+                                        <span className="text-gray-400">
+                                            <strong className="text-white">{completed}</strong> / {total} equipos evaluados
+                                        </span>
+                                        <span className="text-purple-400 font-bold">{pct}%</span>
+                                    </div>
+                                    <div className="mt-2 h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-purple-500 transition-all"
+                                            style={{ width: `${pct}%` }}
+                                        />
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                )}
             </div>
         </main>
+    )
+}
+
+function BackgroundGrid() {
+    return (
+        <div className="fixed inset-0 pointer-events-none z-0">
+            <div
+                className="w-full h-full"
+                style={{
+                    backgroundImage: `
+            radial-gradient(circle at 1px 1px, rgba(170, 255, 0, 0.08) 1px, transparent 1px),
+            linear-gradient(45deg, rgba(170, 255, 0, 0.02) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(170, 255, 0, 0.02) 25%, transparent 25%)
+          `,
+                    backgroundSize: '50px 50px, 100px 100px, 100px 100px',
+                    backgroundPosition: '0 0, 0 0, 10px 10px',
+                    opacity: 1,
+                }}
+            />
+        </div>
     )
 }

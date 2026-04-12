@@ -1,7 +1,8 @@
 import Navbar from "@/components/navbar"
 import { createClient } from "@/lib/supabase/server"
 import { notFound, redirect } from "next/navigation"
-import { Users, LayoutDashboard, ShieldCheck, Github, ExternalLink } from "lucide-react"
+import { Users, LayoutDashboard, ShieldCheck, Github, ExternalLink, Sliders, Gavel, Monitor } from "lucide-react"
+import Link from "next/link"
 
 export const dynamic = "force-dynamic"
 
@@ -82,6 +83,46 @@ export default async function AdminDashboardPage() {
                         <h1 className="text-4xl font-bold">Admin Dashboard</h1>
                         <p className="text-gray-400">Moderación y gestión de usuarios y equipos.</p>
                     </div>
+                </div>
+
+                {/* Quick links to new admin sections */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                    <Link
+                        href="/admin/jurados"
+                        className="group flex items-center gap-3 p-5 rounded-2xl border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all"
+                    >
+                        <div className="w-11 h-11 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                            <Gavel className="w-5 h-5 text-purple-400" />
+                        </div>
+                        <div>
+                            <p className="font-bold text-white">Jurados</p>
+                            <p className="text-xs text-gray-400">Asignar jueces a retos</p>
+                        </div>
+                    </Link>
+                    <Link
+                        href="/admin/criterios"
+                        className="group flex items-center gap-3 p-5 rounded-2xl border border-[#AAFF00]/20 bg-[#AAFF00]/5 hover:bg-[#AAFF00]/10 transition-all"
+                    >
+                        <div className="w-11 h-11 rounded-xl bg-[#AAFF00]/20 flex items-center justify-center">
+                            <Sliders className="w-5 h-5 text-[#AAFF00]" />
+                        </div>
+                        <div>
+                            <p className="font-bold text-white">Criterios</p>
+                            <p className="text-xs text-gray-400">Editar criterios y pesos</p>
+                        </div>
+                    </Link>
+                    <Link
+                        href="/admin/dashboard-publico"
+                        className="group flex items-center gap-3 p-5 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/10 transition-all"
+                    >
+                        <div className="w-11 h-11 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+                            <Monitor className="w-5 h-5 text-cyan-400" />
+                        </div>
+                        <div>
+                            <p className="font-bold text-white">Dashboard público</p>
+                            <p className="text-xs text-gray-400">PIN y visibilidad</p>
+                        </div>
+                    </Link>
                 </div>
 
                 {/* Stats */}
