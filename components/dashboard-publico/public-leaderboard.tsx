@@ -7,9 +7,11 @@ import {
     teamScoreForChallenge,
     teamGeneralScore,
     teamCriterionAverage,
+    computeJuryStats,
     type Criterion,
     type Score,
     type Evaluation,
+    type JuryStats,
 } from '@/lib/scoring'
 
 type Challenge = { id: string; title: string; has_jury: boolean }
@@ -19,6 +21,7 @@ type Registration = { team_id: string; challenge_id: string }
 type LeaderboardRow = {
     team: Team
     total: number | null
+    rawTotal: number | null  // nota cruda sin normalizar (solo ranking general)
     juryCount: number
     perCriterion: { criterion: Criterion; value: number | null }[]
 }
@@ -113,7 +116,7 @@ export default function PublicLeaderboard({
                             scores,
                         }).value,
                     }))
-                    return { team, total, juryCount, perCriterion }
+                    return { team, total, rawTotal: null as number | null, juryCount, perCriterion }
                 })
                 .filter((r): r is LeaderboardRow => r !== null)
 
@@ -122,18 +125,25 @@ export default function PublicLeaderboard({
         })
     }, [challenges, registrations, criteria, evaluations, scores, teamsById])
 
-    // Ranking general detallado
+    // Estadísticas de fairness (se recalculan cada vez que cambian las notas)
+    const juryStats = useMemo(
+        () => computeJuryStats({ criteria, evaluations, scores }),
+        [criteria, evaluations, scores]
+    )
+
+    // Ranking general detallado CON normalización
     const generalRanking = useMemo(() => {
         const teamIds = Array.from(new Set(evaluations.map(e => e.team_id)))
         const rows: LeaderboardRow[] = teamIds
             .map(tid => {
                 const team = teamsById.get(tid)
                 if (!team) return null
-                const { value: total, juryCount } = teamGeneralScore({
+                const { value: total, rawValue, juryCount } = teamGeneralScore({
                     teamId: tid,
                     criteria,
                     evaluations,
                     scores,
+                    stats: juryStats,
                 })
                 const perCriterion = generalCriteria.map(crit => ({
                     criterion: crit,
@@ -144,12 +154,12 @@ export default function PublicLeaderboard({
                         scores,
                     }).value,
                 }))
-                return { team, total, juryCount, perCriterion }
+                return { team, total, rawTotal: rawValue, juryCount, perCriterion }
             })
             .filter((r): r is LeaderboardRow => r !== null)
         rows.sort((a, b) => (b.total ?? -1) - (a.total ?? -1))
         return rows
-    }, [evaluations, criteria, scores, teamsById, generalCriteria])
+    }, [evaluations, criteria, scores, teamsById, generalCriteria, juryStats])
 
     return (
         <div className="space-y-10">
@@ -160,8 +170,8 @@ export default function PublicLeaderboard({
                     <h2 className="text-xl font-bold text-[#AAFF00]">Clasificación general (final)</h2>
                 </div>
                 <p className="text-xs text-gray-400 mb-4">
-                    Media por criterio general en todas las evaluaciones del equipo.
-                    {/* TODO(fairness): media simple sin normalización entre jueces. */}
+                    Total normalizado (z-score por juez) para compensar diferencias de criterio entre jurados.
+                    Las notas por criterio son las crudas; el total integra la corrección.
                 </p>
                 <DetailedTable
                     rows={generalRanking}
@@ -263,8 +273,15 @@ function DetailedTable({
                                         <ScoreCell value={value} />
                                     </td>
                                 ))}
-                                <td className="px-3 py-3 text-right tabular-nums font-bold text-base">
-                                    {r.total !== null ? r.total.toFixed(2) : '—'}
+                                <td className="px-3 py-3 text-right tabular-nums">
+                                    <div className="font-bold text-base">
+                                        {r.total !== null ? r.total.toFixed(2) : '—'}
+                                    </div>
+                                    {r.rawTotal !== null && r.total !== null && Math.abs(r.rawTotal - r.total) > 0.01 && (
+                                        <div className="text-[10px] text-gray-500" title="Nota cruda sin normalizar">
+                                            cruda: {r.rawTotal.toFixed(2)}
+                                        </div>
+                                    )}
                                 </td>
                                 <td className="px-3 py-3 text-right text-xs text-gray-400 rounded-r-xl">
                                     {r.juryCount}
