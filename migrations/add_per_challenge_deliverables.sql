@@ -14,7 +14,18 @@ ALTER TABLE public.deliverables
 CREATE INDEX IF NOT EXISTS idx_deliverables_challenge
   ON public.deliverables(challenge_id);
 
--- 3. Marcar retos transversales (GDG). Sus jueces ven TODOS los repos y entregables.
+-- 3. Policy de UPDATE en challenge_registrations (faltaba, necesaria para guardar github_url)
+CREATE POLICY "Team members can update their challenge registrations."
+  ON public.challenge_registrations FOR UPDATE
+  TO authenticated USING (
+    EXISTS (
+      SELECT 1 FROM public.team_members
+      WHERE team_members.team_id = challenge_registrations.team_id
+      AND team_members.user_id = auth.uid()
+    )
+  );
+
+-- 4. Marcar retos transversales (GDG). Sus jueces ven TODOS los repos y entregables.
 ALTER TABLE public.challenges
   ADD COLUMN IF NOT EXISTS is_transversal BOOLEAN DEFAULT false NOT NULL;
 
