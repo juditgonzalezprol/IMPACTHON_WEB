@@ -38,7 +38,7 @@ export default async function JuradoEvaluatePage({
 
     // Reto y equipo
     const [{ data: challenge }, { data: team }] = await Promise.all([
-        supabase.from('challenges').select('id, title').eq('id', challengeId).single(),
+        supabase.from('challenges').select('id, title, is_transversal').eq('id', challengeId).single(),
         supabase
             .from('teams')
             .select('id, name, description, github_url, demo_url')
@@ -47,21 +47,34 @@ export default async function JuradoEvaluatePage({
     ])
     if (!challenge || !team) notFound()
 
-    // Confirmar que el equipo está inscrito al reto
+    // Confirmar que el equipo está inscrito al reto + obtener repo del reto
     const { data: registration } = await supabase
         .from('challenge_registrations')
-        .select('team_id')
+        .select('team_id, github_url')
         .eq('challenge_id', challengeId)
         .eq('team_id', teamId)
         .maybeSingle()
     if (!registration) notFound()
 
-    // Entregables
-    const { data: deliverables } = await supabase
+    // El repo que el juez ve: el del reto si existe, sino el del equipo (fallback)
+    // Para retos transversales (GDG): ver el repo del equipo
+    const challengeRepoUrl = (challenge as any).is_transversal
+        ? team.github_url
+        : (registration.github_url || team.github_url)
+
+    // Entregables: filtrar por reto.
+    // Retos transversales: ven TODO. Retos normales: solo los de su reto + los generales (null).
+    let deliverablesQuery = supabase
         .from('deliverables')
-        .select('id, title, description, url')
+        .select('id, title, description, url, challenge_id')
         .eq('team_id', teamId)
         .order('created_at')
+
+    if (!(challenge as any).is_transversal) {
+        deliverablesQuery = deliverablesQuery.or(`challenge_id.eq.${challengeId},challenge_id.is.null`)
+    }
+
+    const { data: deliverables } = await deliverablesQuery
 
     // Criterios aplicables
     const { data: criteriaRaw } = await supabase
@@ -122,11 +135,11 @@ export default async function JuradoEvaluatePage({
                             </p>
                         </div>
 
-                        {(team.github_url || team.demo_url) && (
+                        {(challengeRepoUrl || team.demo_url) && (
                             <div className="flex flex-wrap gap-3">
-                                {team.github_url && (
+                                {challengeRepoUrl && (
                                     <a
-                                        href={team.github_url}
+                                        href={challengeRepoUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-sm bg-black hover:bg-white/10 px-4 py-2 rounded-lg text-gray-300 border border-white/10 transition-colors"
