@@ -28,3 +28,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# credenciales de jueces (no subir al repo)
+jueces-credenciales.csv

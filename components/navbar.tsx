@@ -16,10 +16,8 @@ import {
 
 const navLinks = [
   { name: "Inicio", href: "/#inicio" },
+  { name: "Ganadores", href: "/#ganadores" },
   { name: "Retos", href: "/#retos" },
-  { name: "Premios", href: "/#premios" },
-  { name: "Agenda", href: "/#agenda" },
-  { name: "FAQ", href: "/#faq" },
 ]
 
 const authNavLinks: { name: string; href: string }[] = []

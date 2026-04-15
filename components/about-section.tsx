@@ -7,27 +7,26 @@ import { Users, Clock, Trophy, Zap } from "lucide-react"
 const stats = [
   {
     icon: Users,
-    value: "100+",
+    value: "140",
     label: "Participantes",
     suffix: "",
   },
   {
     icon: Clock,
     value: "36",
-    label: "Horas",
+    label: "Horas sin parar",
     suffix: "h",
   },
   {
     icon: Trophy,
-    value: "2,000",
-    label: "en Premios",
-    suffix: "€",
-    prefix: true,
+    value: "4",
+    label: "Equipos premiados",
+    suffix: "",
   },
   {
     icon: Zap,
     value: "4",
-    label: "Retos",
+    label: "Retos planteados",
     suffix: "",
   },
 ]
@@ -61,10 +60,10 @@ export default function AboutSection() {
           }`}
         >
           <span className="inline-block px-3 py-1 text-xs font-bold text-[#AAFF00] uppercase tracking-widest mb-4 border border-[#AAFF00]/30 rounded-full">
-            El Evento
+            Resumen del Evento
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Donde las ideas se convierten en{" "}
+            Una primera edición{" "}
             <span
               className="transition-all duration-300"
               style={{
@@ -72,13 +71,15 @@ export default function AboutSection() {
                 color: `rgba(170, 255, 0, ${colorProgress / 100})`,
               }}
             >
-              realidad
+              inolvidable
             </span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Impacthon es el mayor hackathon de la Universidad de Santiago de Compostela. 
-            Reunimos a estudiantes, profesionales y emprendedores para crear soluciones 
-            tecnologicas con impacto real en nuestra sociedad.
+            Impacthon 2026 fue un éxito rotundo. 36 horas en la ETSE de la USC,
+            140 participantes apretados al teclado, un ambientazo brutal y proyectos
+            que sorprendieron a todo el jurado. Gracias a todos los que vinisteis,
+            programasteis, dormisteis poco y nos ayudasteis a montar algo único.
+            Nos vemos en la próxima edición.
           </p>
         </div>
 
@@ -95,9 +96,8 @@ export default function AboutSection() {
                 <stat.icon className="w-7 h-7 sm:w-8 sm:h-8 text-[#AAFF00]" />
               </div>
               <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-2 group-hover:text-[#AAFF00] transition-colors">
-                {stat.prefix && <span className="text-[#AAFF00]">{stat.suffix}</span>}
                 {stat.value}
-                {!stat.prefix && stat.suffix && <span className="text-[#AAFF00] text-2xl">{stat.suffix}</span>}
+                {stat.suffix && <span className="text-[#AAFF00] text-2xl">{stat.suffix}</span>}
               </div>
               <div className="text-gray-400 text-sm sm:text-base font-medium">{stat.label}</div>
             </div>
