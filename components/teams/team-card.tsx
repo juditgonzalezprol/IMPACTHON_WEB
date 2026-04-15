@@ -14,13 +14,16 @@ export default function TeamCard({
     userIsInAnotherTeam,
     challenges = [],
     registeredChallengeIds = [],
+    challengeRepos = [],
 }: {
     team: any
     isMyTeam: boolean
     userIsInAnotherTeam: boolean
     challenges?: { id: string; title: string }[]
     registeredChallengeIds?: string[]
+    challengeRepos?: { challenge_id: string; github_url: string | null }[]
 }) {
+    const challengeTitleById = new Map(challenges.map(c => [c.id, c.title]))
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [description, setDescription] = useState(team.description || "")
@@ -189,11 +192,30 @@ export default function TeamCard({
                     </p>
 
                     {/* Render Links if they exist */}
-                    {(team.github_url || team.demo_url) && (
-                        <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                    {(team.github_url || team.demo_url || challengeRepos.length > 0) && (
+                        <div className="flex flex-col gap-2 pt-2 border-t border-white/5">
+                            {/* Repos por reto */}
+                            {challengeRepos.map((r) => (
+                                <a
+                                    key={r.challenge_id}
+                                    href={r.github_url!}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-3 py-1.5 bg-[#121212] hover:bg-white/10 border border-white/10 rounded-md text-sm text-gray-300 transition-colors min-w-0"
+                                >
+                                    <Github size={14} className="shrink-0" />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400 shrink-0">
+                                        {challengeTitleById.get(r.challenge_id)?.split(' - ')[0] || 'Reto'}
+                                    </span>
+                                    <span className="truncate text-xs text-gray-400">
+                                        {r.github_url!.replace(/^https?:\/\/(www\.)?github\.com\//, '')}
+                                    </span>
+                                </a>
+                            ))}
+                            {/* Repo de equipo (legacy o si no hay por reto) */}
                             {team.github_url && (
                                 <a href={team.github_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-[#121212] hover:bg-white/10 border border-white/10 rounded-md text-sm text-gray-300 transition-colors">
-                                    <Github size={14} /> Repositorio
+                                    <Github size={14} /> Repositorio del equipo
                                 </a>
                             )}
                             {team.demo_url && (

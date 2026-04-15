@@ -43,7 +43,7 @@ export default async function EquiposPage() {
     `)
         .order('created_at', { ascending: false })
 
-    // 4. Fetch challenges and registrations
+    // 4. Fetch challenges and registrations (con github_url por reto)
     const { data: challenges } = await supabase
         .from('challenges')
         .select('id, title')
@@ -51,13 +51,20 @@ export default async function EquiposPage() {
 
     const { data: allRegistrations } = await supabase
         .from('challenge_registrations')
-        .select('team_id, challenge_id')
+        .select('team_id, challenge_id, github_url')
 
     // Build a map: team_id -> Set of challenge_ids
     const teamChallenges: Record<string, Set<string>> = {}
+    // Build a map: team_id -> Array of { challenge_id, github_url }
+    const teamRepos: Record<string, { challenge_id: string; github_url: string | null }[]> = {}
     allRegistrations?.forEach(r => {
         if (!teamChallenges[r.team_id]) teamChallenges[r.team_id] = new Set()
         teamChallenges[r.team_id].add(r.challenge_id)
+
+        if (r.github_url) {
+            if (!teamRepos[r.team_id]) teamRepos[r.team_id] = []
+            teamRepos[r.team_id].push({ challenge_id: r.challenge_id, github_url: r.github_url })
+        }
     })
 
     // 5. Find if the current user is in a team
@@ -124,6 +131,7 @@ export default async function EquiposPage() {
                             userIsInAnotherTeam={myTeamId !== null && myTeamId !== team.id}
                             challenges={challenges || []}
                             registeredChallengeIds={Array.from(teamChallenges[team.id] || [])}
+                            challengeRepos={teamRepos[team.id] || []}
                         />
                     ))}
 

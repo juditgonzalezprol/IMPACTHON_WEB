@@ -3,12 +3,9 @@ import HeroSection from "@/components/hero-section"
 import IconBoxes from "@/components/icon-boxes"
 import ParticipationBanner from "@/components/participation-banner"
 import AboutSection from "@/components/about-section"
-import HowToSection from "@/components/how-to-section"
 import TracksSection from "@/components/tracks-section"
-import PrizesSection from "@/components/prizes-section"
-import TimelineSection from "@/components/timeline-section"
+import WinnersSection from "@/components/winners-section"
 import SponsorsSection from "@/components/sponsors-section"
-import FAQSection from "@/components/faq-section"
 import TeamSection from "@/components/team-section"
 import Footer from "@/components/footer"
 import FloatingArrow from "@/components/floating-arrow"
@@ -42,12 +39,9 @@ export default function Home() {
         <IconBoxes />
         <AboutSection />
         <ParticipationBanner />
-        <HowToSection />
         <TracksSection />
-        <PrizesSection />
-        <TimelineSection />
+        <WinnersSection />
         <SponsorsSection />
-        <FAQSection />
         <TeamSection />
         <Footer />
       </div>
