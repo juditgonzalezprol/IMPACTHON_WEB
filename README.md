@@ -85,4 +85,4 @@ El proyecto destaca por una interfaz visualmente impactante que combina:
 
 ## 📄 Créditos
 
-Proyecto desarrollado por [Judit González](https://github.com/juditgonzalezprol) para la gestión del evento **Impacthon**.
+Proyecto desarrollado por [Judit González](https://github.com/juditgonzalezprol) y Mateo Bodenlle para la gestión del evento **Impacthon**.
